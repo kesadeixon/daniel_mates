@@ -1,0 +1,759 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Plan de Recuperación — Daniel, 1º ESO</title>
+<link href="https://fonts.googleapis.com/css2?family=Sora:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --bg: #0f1117;
+    --bg2: #181c26;
+    --bg3: #1e2330;
+    --border: rgba(255,255,255,0.08);
+    --border2: rgba(255,255,255,0.14);
+    --text: #e8eaf0;
+    --text2: #9ba3b8;
+    --text3: #5c6478;
+    --teal: #2dd4a0;
+    --teal-dim: rgba(45,212,160,0.12);
+    --blue: #5b9cf6;
+    --blue-dim: rgba(91,156,246,0.12);
+    --purple: #a78bfa;
+    --purple-dim: rgba(167,139,250,0.12);
+    --amber: #fbbf24;
+    --amber-dim: rgba(251,191,36,0.12);
+    --red: #f87171;
+    --red-dim: rgba(248,113,113,0.12);
+    --r: 12px;
+    --r-sm: 8px;
+    --font: 'Sora', sans-serif;
+    --mono: 'JetBrains Mono', monospace;
+  }
+
+  body {
+    font-family: var(--font);
+    background: var(--bg);
+    color: var(--text);
+    min-height: 100vh;
+    padding: 2rem 1rem 4rem;
+    line-height: 1.6;
+  }
+
+  .page { max-width: 720px; margin: 0 auto; }
+
+  /* HEADER */
+  .header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
+  .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
+  .header-badge {
+    font-family: var(--mono);
+    font-size: 11px;
+    color: var(--teal);
+    background: var(--teal-dim);
+    border: 1px solid rgba(45,212,160,0.2);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+  }
+  h1 { font-size: clamp(22px, 4vw, 30px); font-weight: 600; line-height: 1.2; }
+  h1 span { color: var(--teal); }
+  .header-meta { font-size: 13px; color: var(--text2); margin-top: 8px; }
+  .header-meta strong { color: var(--text); font-weight: 500; }
+
+  /* SESIONES */
+  .sesiones-label { font-size: 11px; font-family: var(--mono); color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
+  .sesiones-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 1.5rem; }
+  .sesion {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 10px 8px;
+    text-align: center;
+    font-size: 11px;
+    color: var(--text3);
+    font-family: var(--mono);
+    transition: all 0.2s;
+    cursor: default;
+  }
+  .sesion.active { background: var(--blue-dim); border-color: rgba(91,156,246,0.35); color: var(--blue); }
+  .sesion .ses-num { font-size: 16px; font-weight: 600; display: block; margin-bottom: 2px; color: inherit; }
+
+  /* PROGRESS */
+  .progress-wrap { margin-bottom: 2rem; }
+  .progress-row { display: flex; justify-content: space-between; align-items: center; margin-bottom: 8px; }
+  .progress-title { font-size: 13px; color: var(--text2); }
+  .progress-count { font-family: var(--mono); font-size: 12px; color: var(--text3); }
+  .progress-bar { height: 4px; background: var(--bg3); border-radius: 10px; overflow: hidden; }
+  .progress-fill { height: 100%; background: var(--teal); border-radius: 10px; transition: width 0.6s ease; }
+
+  /* BLOQUES */
+  .bloque {
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    margin-bottom: 10px;
+    overflow: hidden;
+    transition: border-color 0.2s;
+  }
+  .bloque:hover { border-color: var(--border2); }
+
+  .bloque-header {
+    display: flex;
+    align-items: center;
+    gap: 14px;
+    padding: 16px 18px;
+    cursor: pointer;
+    user-select: none;
+    transition: background 0.15s;
+  }
+  .bloque-header:hover { background: rgba(255,255,255,0.02); }
+
+  .bloque-num {
+    width: 32px; height: 32px;
+    border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 13px; font-weight: 600;
+    flex-shrink: 0;
+    font-family: var(--mono);
+  }
+  .bloque-info { flex: 1; min-width: 0; }
+  .bloque-titulo { font-size: 15px; font-weight: 500; color: var(--text); }
+  .bloque-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+
+  .bloque-badge {
+    font-size: 11px; font-family: var(--mono);
+    padding: 3px 10px; border-radius: 20px;
+    white-space: nowrap;
+    display: none;
+  }
+  @media (min-width: 480px) { .bloque-badge { display: inline-block; } }
+
+  .chevron {
+    color: var(--text3);
+    font-size: 18px;
+    transition: transform 0.25s;
+    flex-shrink: 0;
+  }
+  .chevron.open { transform: rotate(180deg); }
+
+  .bloque-body {
+    display: none;
+    padding: 0 18px 18px;
+    border-top: 1px solid var(--border);
+  }
+  .bloque-body.open { display: block; }
+
+  /* SECCIÓN INTERNA */
+  .s-label {
+    font-size: 10px; font-family: var(--mono);
+    text-transform: uppercase; letter-spacing: 0.1em;
+    color: var(--text3);
+    margin: 16px 0 8px;
+  }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tag {
+    font-size: 12px;
+    padding: 4px 11px;
+    border-radius: 20px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text2);
+  }
+
+  .ejercicio {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 12px 14px;
+    margin-bottom: 8px;
+    font-size: 13.5px;
+    line-height: 1.65;
+    color: var(--text2);
+  }
+  .ejercicio strong { color: var(--text); font-weight: 500; }
+  .ejercicio .num {
+    font-family: var(--mono);
+    font-size: 11px;
+    display: inline-block;
+    margin-right: 6px;
+    padding: 1px 7px;
+    border-radius: 4px;
+    vertical-align: middle;
+  }
+
+  .tip {
+    font-size: 12.5px;
+    color: var(--text2);
+    padding: 10px 14px;
+    border-radius: var(--r-sm);
+    margin-top: 12px;
+    line-height: 1.6;
+  }
+  .tip .tip-icon { margin-right: 6px; }
+
+  .btn-bloque {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 14px;
+    padding: 10px 16px;
+    border-radius: var(--r-sm);
+    border: 1px solid var(--border2);
+    background: transparent;
+    color: var(--text2);
+    font-family: var(--font);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.15s;
+    width: 100%;
+    text-align: left;
+  }
+  .btn-bloque:hover { background: rgba(255,255,255,0.04); color: var(--text); border-color: rgba(255,255,255,0.22); }
+  .btn-bloque svg { flex-shrink: 0; }
+
+  /* COLORES POR BLOQUE */
+  .b1 .bloque-num { background: rgba(45,212,160,0.15); color: var(--teal); }
+  .b1 .bloque-badge { background: rgba(45,212,160,0.1); color: var(--teal); border: 1px solid rgba(45,212,160,0.2); }
+  .b1 .ejercicio .num { background: rgba(45,212,160,0.12); color: var(--teal); }
+  .b1 .tip { background: rgba(45,212,160,0.06); border-left: 2px solid rgba(45,212,160,0.3); }
+  .b1 .btn-bloque:hover { color: var(--teal); }
+
+  .b2 .bloque-num { background: rgba(91,156,246,0.15); color: var(--blue); }
+  .b2 .bloque-badge { background: rgba(91,156,246,0.1); color: var(--blue); border: 1px solid rgba(91,156,246,0.2); }
+  .b2 .ejercicio .num { background: rgba(91,156,246,0.12); color: var(--blue); }
+  .b2 .tip { background: rgba(91,156,246,0.06); border-left: 2px solid rgba(91,156,246,0.3); }
+  .b2 .btn-bloque:hover { color: var(--blue); }
+
+  .b3 .bloque-num { background: rgba(167,139,250,0.15); color: var(--purple); }
+  .b3 .bloque-badge { background: rgba(167,139,250,0.1); color: var(--purple); border: 1px solid rgba(167,139,250,0.2); }
+  .b3 .ejercicio .num { background: rgba(167,139,250,0.12); color: var(--purple); }
+  .b3 .tip { background: rgba(167,139,250,0.06); border-left: 2px solid rgba(167,139,250,0.3); }
+  .b3 .btn-bloque:hover { color: var(--purple); }
+
+  .b4 .bloque-num { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .b4 .bloque-badge { background: rgba(251,191,36,0.1); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+  .b4 .ejercicio .num { background: rgba(251,191,36,0.12); color: var(--amber); }
+  .b4 .tip { background: rgba(251,191,36,0.06); border-left: 2px solid rgba(251,191,36,0.3); }
+  .b4 .btn-bloque:hover { color: var(--amber); }
+
+  .b5 .bloque-num { background: rgba(248,113,113,0.15); color: var(--red); }
+  .b5 .bloque-badge { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+  .b5 .ejercicio .num { background: rgba(248,113,113,0.12); color: var(--red); }
+  .b5 .tip { background: rgba(248,113,113,0.06); border-left: 2px solid rgba(248,113,113,0.3); }
+  .b5 .btn-bloque:hover { color: var(--red); }
+
+  /* TUTOR CHAT */
+  .tutor-section {
+    margin-top: 2rem;
+    background: var(--bg2);
+    border: 1px solid var(--border);
+    border-radius: var(--r);
+    overflow: hidden;
+  }
+  .tutor-header {
+    padding: 16px 18px;
+    border-bottom: 1px solid var(--border);
+    display: flex; align-items: center; gap: 12px;
+  }
+  .tutor-avatar {
+    width: 36px; height: 36px; border-radius: 50%;
+    background: linear-gradient(135deg, var(--teal-dim), var(--blue-dim));
+    border: 1px solid rgba(45,212,160,0.25);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 16px;
+  }
+  .tutor-name { font-size: 14px; font-weight: 500; }
+  .tutor-status { font-size: 11px; color: var(--teal); font-family: var(--mono); }
+
+  .chat-messages {
+    padding: 16px 18px;
+    min-height: 120px;
+    max-height: 420px;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .msg { display: flex; gap: 10px; }
+  .msg.user { flex-direction: row-reverse; }
+  .msg-bubble {
+    max-width: 78%;
+    padding: 10px 14px;
+    border-radius: 14px;
+    font-size: 13.5px;
+    line-height: 1.6;
+  }
+  .msg.bot .msg-bubble {
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    color: var(--text);
+    border-bottom-left-radius: 4px;
+  }
+  .msg.user .msg-bubble {
+    background: var(--blue-dim);
+    border: 1px solid rgba(91,156,246,0.2);
+    color: var(--text);
+    border-bottom-right-radius: 4px;
+  }
+  .msg-ava {
+    width: 28px; height: 28px; border-radius: 50%;
+    flex-shrink: 0; display: flex; align-items: center; justify-content: center;
+    font-size: 13px; margin-top: 2px;
+  }
+  .msg.bot .msg-ava { background: var(--teal-dim); border: 1px solid rgba(45,212,160,0.2); color: var(--teal); }
+  .msg.user .msg-ava { background: var(--blue-dim); border: 1px solid rgba(91,156,246,0.2); color: var(--blue); }
+
+  .typing { display: flex; align-items: center; gap: 4px; padding: 12px 14px; }
+  .typing span {
+    width: 6px; height: 6px; border-radius: 50%;
+    background: var(--text3);
+    animation: bounce 1.2s infinite;
+  }
+  .typing span:nth-child(2) { animation-delay: 0.2s; }
+  .typing span:nth-child(3) { animation-delay: 0.4s; }
+  @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
+
+  .chat-input-wrap {
+    padding: 12px 18px;
+    border-top: 1px solid var(--border);
+    display: flex; gap: 10px; align-items: flex-end;
+  }
+  .chat-input {
+    flex: 1;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: var(--r-sm);
+    padding: 10px 14px;
+    color: var(--text);
+    font-family: var(--font);
+    font-size: 14px;
+    resize: none;
+    min-height: 42px;
+    max-height: 120px;
+    outline: none;
+    transition: border-color 0.15s;
+  }
+  .chat-input::placeholder { color: var(--text3); }
+  .chat-input:focus { border-color: rgba(91,156,246,0.4); }
+  .send-btn {
+    width: 42px; height: 42px;
+    background: var(--blue-dim);
+    border: 1px solid rgba(91,156,246,0.3);
+    border-radius: var(--r-sm);
+    color: var(--blue);
+    cursor: pointer;
+    display: flex; align-items: center; justify-content: center;
+    transition: all 0.15s;
+    flex-shrink: 0;
+  }
+  .send-btn:hover { background: rgba(91,156,246,0.2); }
+  .send-btn:active { transform: scale(0.95); }
+  .send-btn svg { width: 18px; height: 18px; }
+
+  /* QUICK ACTIONS */
+  .quick-actions { padding: 0 18px 14px; display: flex; flex-wrap: wrap; gap: 6px; }
+  .qa-btn {
+    font-size: 12px;
+    padding: 5px 12px;
+    background: var(--bg3);
+    border: 1px solid var(--border);
+    border-radius: 20px;
+    color: var(--text2);
+    cursor: pointer;
+    font-family: var(--font);
+    transition: all 0.15s;
+  }
+  .qa-btn:hover { border-color: var(--border2); color: var(--text); background: rgba(255,255,255,0.04); }
+
+  /* FOOTER */
+  .footer { margin-top: 2.5rem; padding-top: 1.5rem; border-top: 1px solid var(--border); text-align: center; }
+  .footer p { font-size: 12px; color: var(--text3); }
+
+  /* ANIMACIÓN ENTRADA */
+  .bloque, .tutor-section, .header {
+    animation: fadeUp 0.4s ease backwards;
+  }
+  .bloque:nth-child(1) { animation-delay: 0.05s; }
+  .bloque:nth-child(2) { animation-delay: 0.1s; }
+  .bloque:nth-child(3) { animation-delay: 0.15s; }
+  .bloque:nth-child(4) { animation-delay: 0.2s; }
+  .bloque:nth-child(5) { animation-delay: 0.25s; }
+  .tutor-section { animation-delay: 0.3s; }
+  @keyframes fadeUp { from { opacity:0; transform: translateY(12px); } to { opacity:1; transform: translateY(0); } }
+
+  /* SCROLLBAR */
+  .chat-messages::-webkit-scrollbar { width: 4px; }
+  .chat-messages::-webkit-scrollbar-track { background: transparent; }
+  .chat-messages::-webkit-scrollbar-thumb { background: var(--border2); border-radius: 10px; }
+</style>
+</head>
+<body>
+<div class="page">
+
+  <header class="header">
+    <div class="header-top">
+      <div>
+        <h1>Plan de recuperación<br><span>Estadística y Probabilidad</span></h1>
+        <p class="header-meta">Para <strong>Daniel</strong> · <strong>1º ESO</strong> · Matemáticas</p>
+      </div>
+      <span class="header-badge">5 sesiones · Nivel recuperación</span>
+    </div>
+
+    <div class="sesiones-label">Sesiones del plan</div>
+    <div class="sesiones-grid">
+      <div class="sesion active"><span class="ses-num">1</span>Variables</div>
+      <div class="sesion active"><span class="ses-num">2</span>Frecuencias</div>
+      <div class="sesion active"><span class="ses-num">3</span>Intervalos</div>
+      <div class="sesion active"><span class="ses-num">4</span>Gráficos</div>
+      <div class="sesion active"><span class="ses-num">5</span>Laplace</div>
+    </div>
+
+    <div class="progress-wrap">
+      <div class="progress-row">
+        <span class="progress-title">Progreso del plan</span>
+        <span class="progress-count" id="progLabel">0 / 5 completados</span>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill" id="progFill" style="width:0%"></div>
+      </div>
+    </div>
+  </header>
+
+  <!-- BLOQUE 1 -->
+  <div class="bloque b1">
+    <div class="bloque-header" onclick="toggle(this)">
+      <div class="bloque-num">1</div>
+      <div class="bloque-info">
+        <div class="bloque-titulo">Variables y tipos de datos</div>
+        <div class="bloque-sub">La base de todo — qué estamos midiendo y cómo</div>
+      </div>
+      <span class="bloque-badge">Sesión 1</span>
+      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+    </div>
+    <div class="bloque-body">
+      <div class="s-label">Conceptos clave</div>
+      <div class="tags">
+        <span class="tag">Variable estadística</span>
+        <span class="tag">Cualitativa</span>
+        <span class="tag">Cuantitativa</span>
+        <span class="tag">Discreta vs continua</span>
+        <span class="tag">Población y muestra</span>
+      </div>
+      <div class="s-label">Ejercicios</div>
+      <div class="ejercicio"><span class="num">Ej 1</span> Clasifica como cualitativa o cuantitativa: color de ojos, altura, nota del examen, deporte favorito, número de hermanos.</div>
+      <div class="ejercicio"><span class="num">Ej 2</span> ¿Discreta o continua? Número de libros leídos · Temperatura · Número de goles · Peso de una mochila.</div>
+      <div class="ejercicio"><span class="num">Ej 3</span> En una clase de 28 alumnos se pregunta el número de mascotas. ¿Cuál es la población? ¿Cuál sería una muestra válida?</div>
+      <div class="tip"><span class="tip-icon">💡</span> <strong>Error típico:</strong> confundir "número de hermanos" (discreta, se <em>cuenta</em>) con "peso" (continua, se <em>mide</em>). La clave: ¿puede tomar valores intermedios como 1,73?</div>
+      <button class="btn-bloque" onclick="quickAsk('Explícame el bloque 1: variables estadísticas. ¿Cuál es la diferencia entre discreta y continua?')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Preguntar al tutor sobre este bloque
+      </button>
+    </div>
+  </div>
+
+  <!-- BLOQUE 2 -->
+  <div class="bloque b2">
+    <div class="bloque-header" onclick="toggle(this)">
+      <div class="bloque-num">2</div>
+      <div class="bloque-info">
+        <div class="bloque-titulo">Frecuencias y tablas de datos</div>
+        <div class="bloque-sub">Contar bien, ordenar bien y calcular frecuencias</div>
+      </div>
+      <span class="bloque-badge">Sesión 2</span>
+      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+    </div>
+    <div class="bloque-body">
+      <div class="s-label">Conceptos clave</div>
+      <div class="tags">
+        <span class="tag">Frecuencia absoluta (nᵢ)</span>
+        <span class="tag">Frecuencia relativa (fᵢ)</span>
+        <span class="tag">Fr. acumulada (Nᵢ)</span>
+        <span class="tag">Tabla de frecuencias</span>
+        <span class="tag">Suma total N</span>
+      </div>
+      <div class="s-label">Ejercicios</div>
+      <div class="ejercicio"><span class="num">Ej 1</span> Las notas de 10 alumnos son: 5, 7, 6, 8, 5, 7, 9, 6, 5, 8. Construye la tabla con frecuencia absoluta, relativa y acumulada.</div>
+      <div class="ejercicio"><span class="num">Ej 2</span> La frecuencia relativa de un valor es 0,25 y hay 20 datos en total. ¿Cuál es su frecuencia absoluta?</div>
+      <div class="ejercicio"><span class="num">Ej 3</span> Si la frecuencia acumulada hasta el valor 7 es 14 de 20 datos, ¿qué porcentaje de alumnos tiene nota ≤ 7?</div>
+      <div class="tip"><span class="tip-icon">💡</span> <strong>Error típico:</strong> dividir el total entre la absoluta en vez de al revés. Recuerda: fᵢ = nᵢ / N. La suma de todas las fᵢ siempre da exactamente 1.</div>
+      <button class="btn-bloque" onclick="quickAsk('Explícame cómo construir una tabla de frecuencias paso a paso. Tengo estos datos: 5, 7, 6, 8, 5, 7, 9, 6, 5, 8')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Preguntar al tutor sobre este bloque
+      </button>
+    </div>
+  </div>
+
+  <!-- BLOQUE 3 -->
+  <div class="bloque b3">
+    <div class="bloque-header" onclick="toggle(this)">
+      <div class="bloque-num">3</div>
+      <div class="bloque-info">
+        <div class="bloque-titulo">Intervalos, rango y marcas de clase</div>
+        <div class="bloque-sub">Agrupar datos y trabajar con tablas de intervalos</div>
+      </div>
+      <span class="bloque-badge">Sesiones 2–3</span>
+      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+    </div>
+    <div class="bloque-body">
+      <div class="s-label">Conceptos clave</div>
+      <div class="tags">
+        <span class="tag">Rango o recorrido</span>
+        <span class="tag">Intervalo [a, b)</span>
+        <span class="tag">Amplitud</span>
+        <span class="tag">Marca de clase</span>
+        <span class="tag">Tabla agrupada</span>
+      </div>
+      <div class="s-label">Ejercicios</div>
+      <div class="ejercicio"><span class="num">Ej 1</span> Estaturas de 8 alumnos: 152, 165, 170, 158, 172, 161, 168, 155. Calcula el rango y forma intervalos de amplitud 10.</div>
+      <div class="ejercicio"><span class="num">Ej 2</span> Para el intervalo [160, 170), calcula la marca de clase. ¿Para qué sirve ese valor?</div>
+      <div class="ejercicio"><span class="num">Ej 3</span> Con los datos del ejercicio 1, completa la tabla agrupada incluyendo marcas de clase y frecuencias absolutas.</div>
+      <div class="tip"><span class="tip-icon">💡</span> La marca de clase es el punto medio del intervalo: (límite inferior + límite superior) / 2. Es el valor que "representa" a todo ese grupo en los cálculos.</div>
+      <button class="btn-bloque" onclick="quickAsk('No entiendo bien qué es la marca de clase ni para qué sirve. ¿Me lo explicas con un ejemplo sencillo?')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Preguntar al tutor sobre este bloque
+      </button>
+    </div>
+  </div>
+
+  <!-- BLOQUE 4 -->
+  <div class="bloque b4">
+    <div class="bloque-header" onclick="toggle(this)">
+      <div class="bloque-num">4</div>
+      <div class="bloque-info">
+        <div class="bloque-titulo">Histogramas y diagramas estadísticos</div>
+        <div class="bloque-sub">Representar datos visualmente: leer e interpretar</div>
+      </div>
+      <span class="bloque-badge">Sesión 3</span>
+      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+    </div>
+    <div class="bloque-body">
+      <div class="s-label">Conceptos clave</div>
+      <div class="tags">
+        <span class="tag">Histograma</span>
+        <span class="tag">Polígono de frecuencias</span>
+        <span class="tag">Diagrama de barras</span>
+        <span class="tag">Diagrama de sectores</span>
+        <span class="tag">Pictograma</span>
+      </div>
+      <div class="s-label">Ejercicios</div>
+      <div class="ejercicio"><span class="num">Ej 1</span> ¿En qué se diferencia un histograma de un diagrama de barras? ¿Cuándo se usa cada uno?</div>
+      <div class="ejercicio"><span class="num">Ej 2</span> Con las estaturas del bloque 3 agrupadas, dibuja el histograma. Etiqueta los ejes con las unidades correctas.</div>
+      <div class="ejercicio"><span class="num">Ej 3</span> El 40% practica fútbol, 30% baloncesto, 20% natación y 10% otro. ¿Cuántos grados corresponde a cada sector en un diagrama circular?</div>
+      <div class="tip"><span class="tip-icon">💡</span> En el histograma las barras se <em>tocan</em> (datos agrupados o continuos). En el diagrama de barras hay espacio entre ellas (datos discretos o cualitativos). Esa diferencia visual siempre cae en el examen.</div>
+      <button class="btn-bloque" onclick="quickAsk('¿Cómo se dibuja un histograma? ¿En qué se diferencia de un diagrama de barras normal?')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Preguntar al tutor sobre este bloque
+      </button>
+    </div>
+  </div>
+
+  <!-- BLOQUE 5 -->
+  <div class="bloque b5">
+    <div class="bloque-header" onclick="toggle(this)">
+      <div class="bloque-num">5</div>
+      <div class="bloque-info">
+        <div class="bloque-titulo">Probabilidad y regla de Laplace</div>
+        <div class="bloque-sub">Calcular la probabilidad de sucesos sencillos</div>
+      </div>
+      <span class="bloque-badge">Sesión 4</span>
+      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+    </div>
+    <div class="bloque-body">
+      <div class="s-label">Conceptos clave</div>
+      <div class="tags">
+        <span class="tag">Experimento aleatorio</span>
+        <span class="tag">Espacio muestral</span>
+        <span class="tag">Suceso</span>
+        <span class="tag">Regla de Laplace</span>
+        <span class="tag">P(A) = fav / posibles</span>
+      </div>
+      <div class="s-label">Ejercicios</div>
+      <div class="ejercicio"><span class="num">Ej 1</span> Lanzamos un dado de 6 caras. ¿Cuál es la probabilidad de obtener un número par? Escribe el espacio muestral y aplica Laplace.</div>
+      <div class="ejercicio"><span class="num">Ej 2</span> En una bolsa hay 3 bolas rojas, 2 azules y 5 verdes. Se saca una al azar. ¿Probabilidad de sacar azul? ¿Y de que no sea roja?</div>
+      <div class="ejercicio"><span class="num">Ej 3</span> Una clase tiene 12 chicos y 18 chicas. Se elige un representante al azar. ¿Probabilidad de que sea chica? Expresa el resultado como fracción, decimal y porcentaje.</div>
+      <div class="tip"><span class="tip-icon">💡</span> Error clásico: olvidar contar bien el espacio muestral (todos los resultados posibles). Laplace solo funciona cuando todos los resultados tienen la misma probabilidad.</div>
+      <button class="btn-bloque" onclick="quickAsk('Explícame la regla de Laplace con un ejemplo fácil. No entiendo bien qué son los casos favorables y los casos posibles.')">
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+        Preguntar al tutor sobre este bloque
+      </button>
+    </div>
+  </div>
+
+  <!-- TUTOR CHAT -->
+  <div class="tutor-section">
+    <div class="tutor-header">
+      <div class="tutor-avatar">🎓</div>
+      <div>
+        <div class="tutor-name">Tutor de Matemáticas</div>
+        <div class="tutor-status">● disponible</div>
+      </div>
+    </div>
+
+    <div class="chat-messages" id="chatMessages">
+      <div class="msg bot">
+        <div class="msg-ava">🎓</div>
+        <div class="msg-bubble">¡Hola Daniel! Soy tu tutor para el repaso de recuperación. Tenemos 5 bloques y los tienes ahí arriba. <br><br>¿Por dónde quieres empezar? Puedes preguntarme lo que quieras sobre cualquier tema, mandarme un ejercicio que no entiendas, o decirme directamente qué es lo que más te cuesta. Sin prisas. 🙂</div>
+      </div>
+    </div>
+
+    <div class="quick-actions">
+      <button class="qa-btn" onclick="quickAsk('No sé por dónde empezar. ¿Qué me recomiendas?')">¿Por dónde empiezo?</button>
+      <button class="qa-btn" onclick="quickAsk('Hazme un ejercicio de frecuencias para practicar.')">Practicar frecuencias</button>
+      <button class="qa-btn" onclick="quickAsk('Explícame la regla de Laplace desde cero.')">Laplace desde cero</button>
+      <button class="qa-btn" onclick="quickAsk('Haz un simulacro de examen de recuperación de estadística y probabilidad de 1º ESO con 5 preguntas variadas.')">Simulacro de examen</button>
+    </div>
+
+    <div class="chat-input-wrap">
+      <textarea class="chat-input" id="chatInput" placeholder="Escribe tu pregunta o ejercicio..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+      <button class="send-btn" onclick="sendMessage()" aria-label="Enviar">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
+        </svg>
+      </button>
+    </div>
+  </div>
+
+  <footer class="footer">
+    <p>Plan diseñado para recuperación de estadística y probabilidad · 1º ESO · Matemáticas</p>
+  </footer>
+
+</div>
+
+<script>
+const API_URL = "https://api.anthropic.com/v1/messages";
+
+const SYSTEM_PROMPT = `Eres un tutor de matemáticas paciente, claro y motivador para Daniel, un estudiante de 13 años en 1º de ESO que va a recuperación de estadística y probabilidad.
+
+Tu estilo:
+- Cercano, sin tecnicismos innecesarios, con humor suave
+- Explicas PASO A PASO, numerando cada paso
+- Nunca dices "esto es fácil"
+- Señalas errores típicos
+- Propones ejercicios de práctica después de explicar
+- Usas ejemplos cotidianos
+
+Temas que dominas para este nivel:
+- Variables estadísticas (cualitativa/cuantitativa, discreta/continua)
+- Población y muestra
+- Tablas de frecuencias (absoluta, relativa, acumulada)
+- Intervalos, rango, amplitud, marca de clase
+- Histogramas y diagramas (barras, sectores, polígono de frecuencias)
+- Probabilidad y regla de Laplace
+
+Cuando resuelvas ejercicios usa este formato:
+Ejercicio: [enuncia con palabras sencillas]
+Idea clave: [qué hay que hacer]
+Paso a paso:
+1. ...
+2. ...
+Resultado: ...
+Comprobación: ... (si aplica)
+Error típico: ...
+Ejercicio parecido: ... (siempre propón uno)
+
+Responde siempre en español.`;
+
+let history = [];
+
+function toggle(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
+  updateProgress();
+}
+
+function updateProgress() {
+  const open = document.querySelectorAll('.bloque-body.open').length;
+  document.getElementById('progFill').style.width = (open / 5 * 100) + '%';
+  document.getElementById('progLabel').textContent = open + ' / 5 completados';
+}
+
+function autoResize(el) {
+  el.style.height = 'auto';
+  el.style.height = Math.min(el.scrollHeight, 120) + 'px';
+}
+
+function handleKey(e) {
+  if (e.key === 'Enter' && !e.shiftKey) { e.preventDefault(); sendMessage(); }
+}
+
+function quickAsk(text) {
+  document.getElementById('chatInput').value = text;
+  sendMessage();
+}
+
+function addMessage(role, text) {
+  const wrap = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
+  const ava = document.createElement('div');
+  ava.className = 'msg-ava';
+  ava.textContent = role === 'user' ? '👤' : '🎓';
+  const bubble = document.createElement('div');
+  bubble.className = 'msg-bubble';
+  bubble.innerHTML = text.replace(/\n/g, '<br>');
+  div.appendChild(ava);
+  div.appendChild(bubble);
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+  return bubble;
+}
+
+function showTyping() {
+  const wrap = document.getElementById('chatMessages');
+  const div = document.createElement('div');
+  div.className = 'msg bot';
+  div.id = 'typingIndicator';
+  div.innerHTML = '<div class="msg-ava">🎓</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  wrap.appendChild(div);
+  wrap.scrollTop = wrap.scrollHeight;
+}
+
+function removeTyping() {
+  const t = document.getElementById('typingIndicator');
+  if (t) t.remove();
+}
+
+async function sendMessage() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+
+  input.value = '';
+  input.style.height = 'auto';
+  addMessage('user', text);
+  history.push({ role: 'user', content: text });
+  showTyping();
+
+  try {
+    const res = await fetch(API_URL, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: history
+      })
+    });
+
+    const data = await res.json();
+    removeTyping();
+
+    const reply = data.content?.[0]?.text || 'No pude obtener respuesta. Inténtalo de nuevo.';
+    addMessage('bot', reply);
+    history.push({ role: 'assistant', content: reply });
+
+    if (history.length > 20) history = history.slice(-20);
+
+  } catch (err) {
+    removeTyping();
+    addMessage('bot', 'Hubo un problema de conexión. Comprueba tu internet e inténtalo de nuevo.');
+  }
+}
+</script>
+</body>
+</html>
