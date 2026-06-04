@@ -678,7 +678,8 @@ function toggleBloque(header) {
   chevron.classList.toggle('open');
   const open = document.querySelectorAll('#tab-plan .bloque-body.open').length;
   document.getElementById('progFill').style.width = (open / 7 * 100) + '%';
-  document.getElementById('progLabel').textContent = open + ' / 7 abiertos';}
+  document.getElementById('progLabel').textContent = open + ' / 7 abiertos';
+}
 
 function toggleCorr(header) {
   const body = header.nextElementSibling;
@@ -707,7 +708,7 @@ function addMessage(role, text) {
   div.className = 'msg ' + (role === 'user' ? 'user' : 'bot');
   const ava = document.createElement('div');
   ava.className = 'msg-ava';
-  ava.textContent = role === 'user' ? '👤' : '🎓';
+  ava.textContent = role === 'user' ? '\u{1F464}' : '\u{1F393}';
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
   bubble.innerHTML = text.replace(/\n/g, '<br>');
@@ -720,33 +721,13 @@ function showTyping() {
   const wrap = document.getElementById('chatMessages');
   const div = document.createElement('div');
   div.className = 'msg bot'; div.id = 'typingIndicator';
-  div.innerHTML = '<div class="msg-ava">🎓</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
+  div.innerHTML = '<div class="msg-ava">\u{1F393}</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
   wrap.appendChild(div); wrap.scrollTop = wrap.scrollHeight;
 }
 
 function removeTyping() {
   const t = document.getElementById('typingIndicator');
   if (t) t.remove();
-}
-
-const API_URL = "https://api.anthropic.com/v1/messages";
-const SYSTEM_PROMPT = `Eres un tutor de matemáticas paciente, claro y motivador para Daniel, un estudiante de 13 años en 1º de ESO que va a recuperación de estadística y probabilidad. Daniel ya tiene la base pero cometió errores concretos en su examen.
-
-Errores conocidos de Daniel:
-1. Confunde frecuencia absoluta con acumulada al calcular la relativa (fᵢ = nᵢ/N, no Nᵢ/N)
-2. Usa decimales aproximados en probabilidades compuestas en lugar de fracciones exactas
-3. No cuenta bien para encontrar la moda
-4. En el diagrama de árbol sin reposición no ajusta los denominadores de la segunda extracción
-
-Nivel por defecto: MEDIO-ALTO. Responde siempre en español. Formato: Ejercicio → Idea clave → Paso a paso → Resultado → Ejercicio similar.`;
-
-let history = [];
-
-function showTab(name) {
-  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
-  document.getElementById('tab-' + name).classList.add('active');
-  event.target.classList.add('active');
 }
 
 async function sendMessage() {
@@ -761,7 +742,12 @@ async function sendMessage() {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYSTEM_PROMPT, messages: history })
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-20250514',
+        max_tokens: 1000,
+        system: SYSTEM_PROMPT,
+        messages: history
+      })
     });
     const data = await res.json();
     removeTyping();
@@ -774,6 +760,7 @@ async function sendMessage() {
     addMessage('bot', 'Hubo un problema de conexión. Inténtalo de nuevo.');
   }
 }
+
 </script>
 </body>
 </html>
