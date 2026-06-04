@@ -16,20 +16,33 @@
     --purple: #a78bfa; --purple-dim: rgba(167,139,250,0.12);
     --amber: #fbbf24; --amber-dim: rgba(251,191,36,0.12);
     --red: #f87171; --red-dim: rgba(248,113,113,0.12);
+    --green: #4ade80; --green-dim: rgba(74,222,128,0.10);
     --r: 12px; --r-sm: 8px;
     --font: 'Sora', sans-serif; --mono: 'JetBrains Mono', monospace;
   }
   body { font-family: var(--font); background: var(--bg); color: var(--text); min-height: 100vh; padding: 2rem 1rem 4rem; line-height: 1.6; }
-  .page { max-width: 720px; margin: 0 auto; }
+  .page { max-width: 740px; margin: 0 auto; }
 
+  /* NAV TABS */
+  .nav-tabs { display: flex; gap: 6px; margin-bottom: 2rem; flex-wrap: wrap; }
+  .nav-tab { font-size: 13px; padding: 8px 16px; border-radius: var(--r-sm); border: 1px solid var(--border); background: var(--bg2); color: var(--text2); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
+  .nav-tab:hover { border-color: var(--border2); color: var(--text); }
+  .nav-tab.active { background: var(--blue-dim); border-color: rgba(91,156,246,0.4); color: var(--blue); }
+  .nav-tab.exam-tab.active { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.35); color: var(--red); }
+
+  .tab-section { display: none; }
+  .tab-section.active { display: block; }
+
+  /* HEADER */
   .header { margin-bottom: 2.5rem; padding-bottom: 2rem; border-bottom: 1px solid var(--border); }
   .header-top { display: flex; align-items: flex-start; justify-content: space-between; gap: 1rem; margin-bottom: 1rem; }
   .header-badge { font-family: var(--mono); font-size: 11px; color: var(--teal); background: var(--teal-dim); border: 1px solid rgba(45,212,160,0.2); padding: 4px 12px; border-radius: 20px; white-space: nowrap; }
-  h1 { font-size: clamp(22px, 4vw, 30px); font-weight: 600; line-height: 1.2; }
+  h1 { font-size: clamp(20px, 4vw, 28px); font-weight: 600; line-height: 1.2; }
   h1 span { color: var(--teal); }
   .header-meta { font-size: 13px; color: var(--text2); margin-top: 8px; }
   .header-meta strong { color: var(--text); font-weight: 500; }
 
+  /* SESIONES */
   .sesiones-label { font-size: 11px; font-family: var(--mono); color: var(--text3); text-transform: uppercase; letter-spacing: 0.08em; margin-bottom: 10px; }
   .sesiones-grid { display: grid; grid-template-columns: repeat(5, 1fr); gap: 8px; margin-bottom: 1.5rem; }
   .sesion { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 8px; text-align: center; font-size: 11px; color: var(--text3); font-family: var(--mono); }
@@ -43,6 +56,7 @@
   .progress-bar { height: 4px; background: var(--bg3); border-radius: 10px; overflow: hidden; }
   .progress-fill { height: 100%; background: var(--teal); border-radius: 10px; transition: width 0.6s ease; }
 
+  /* BLOQUES */
   .bloque { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 10px; overflow: hidden; transition: border-color 0.2s; }
   .bloque:hover { border-color: var(--border2); }
   .bloque-header { display: flex; align-items: center; gap: 14px; padding: 16px 18px; cursor: pointer; user-select: none; transition: background 0.15s; }
@@ -53,17 +67,15 @@
   .bloque-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
   .bloque-badge { font-size: 11px; font-family: var(--mono); padding: 3px 10px; border-radius: 20px; white-space: nowrap; display: none; }
   @media (min-width: 480px) { .bloque-badge { display: inline-block; } }
-  .chevron { color: var(--text3); font-size: 18px; transition: transform 0.25s; flex-shrink: 0; }
+  .chevron { color: var(--text3); transition: transform 0.25s; flex-shrink: 0; }
   .chevron.open { transform: rotate(180deg); }
   .bloque-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
   .bloque-body.open { display: block; }
 
   .s-label { font-size: 10px; font-family: var(--mono); text-transform: uppercase; letter-spacing: 0.1em; color: var(--text3); margin: 16px 0 8px; }
-  .tags { display: flex; flex-wrap: wrap; gap: 6px; }
+  .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-bottom: 4px; }
   .tag { font-size: 12px; padding: 4px 11px; border-radius: 20px; background: var(--bg3); border: 1px solid var(--border); color: var(--text2); }
 
-  /* Niveles de ejercicio */
-  .nivel-group { margin-bottom: 14px; }
   .nivel-header { display: flex; align-items: center; gap: 8px; margin: 14px 0 8px; }
   .nivel-pill { font-size: 10px; font-family: var(--mono); padding: 2px 10px; border-radius: 20px; font-weight: 500; }
   .nivel-pill.basico { background: rgba(45,212,160,0.1); color: var(--teal); border: 1px solid rgba(45,212,160,0.2); }
@@ -78,7 +90,6 @@
   .ejercicio .num { font-family: var(--mono); font-size: 11px; display: inline-block; margin-right: 6px; padding: 1px 7px; border-radius: 4px; vertical-align: middle; }
   .ejercicio .pista { display: block; margin-top: 8px; font-size: 12px; color: var(--text3); font-style: italic; }
   .ejercicio .pista::before { content: "💭 Pista: "; }
-
   .tip { font-size: 12.5px; color: var(--text2); padding: 10px 14px; border-radius: var(--r-sm); margin-top: 12px; line-height: 1.6; }
 
   .btn-bloque { display: flex; align-items: center; gap: 8px; margin-top: 14px; padding: 10px 16px; border-radius: var(--r-sm); border: 1px solid var(--border2); background: transparent; color: var(--text2); font-family: var(--font); font-size: 13px; cursor: pointer; transition: all 0.15s; width: 100%; text-align: left; }
@@ -90,37 +101,91 @@
   .b1 .ejercicio .num { background: rgba(45,212,160,0.12); color: var(--teal); }
   .b1 .tip { background: rgba(45,212,160,0.06); border-left: 2px solid rgba(45,212,160,0.3); }
   .b1 .btn-bloque:hover { color: var(--teal); }
-
   .b2 .bloque-num { background: rgba(91,156,246,0.15); color: var(--blue); }
   .b2 .bloque-badge { background: rgba(91,156,246,0.1); color: var(--blue); border: 1px solid rgba(91,156,246,0.2); }
   .b2 .ejercicio .num { background: rgba(91,156,246,0.12); color: var(--blue); }
   .b2 .tip { background: rgba(91,156,246,0.06); border-left: 2px solid rgba(91,156,246,0.3); }
   .b2 .btn-bloque:hover { color: var(--blue); }
-
   .b3 .bloque-num { background: rgba(167,139,250,0.15); color: var(--purple); }
   .b3 .bloque-badge { background: rgba(167,139,250,0.1); color: var(--purple); border: 1px solid rgba(167,139,250,0.2); }
   .b3 .ejercicio .num { background: rgba(167,139,250,0.12); color: var(--purple); }
   .b3 .tip { background: rgba(167,139,250,0.06); border-left: 2px solid rgba(167,139,250,0.3); }
   .b3 .btn-bloque:hover { color: var(--purple); }
-
   .b4 .bloque-num { background: rgba(251,191,36,0.15); color: var(--amber); }
   .b4 .bloque-badge { background: rgba(251,191,36,0.1); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
   .b4 .ejercicio .num { background: rgba(251,191,36,0.12); color: var(--amber); }
   .b4 .tip { background: rgba(251,191,36,0.06); border-left: 2px solid rgba(251,191,36,0.3); }
   .b4 .btn-bloque:hover { color: var(--amber); }
-
   .b5 .bloque-num { background: rgba(248,113,113,0.15); color: var(--red); }
   .b5 .bloque-badge { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
   .b5 .ejercicio .num { background: rgba(248,113,113,0.12); color: var(--red); }
   .b5 .tip { background: rgba(248,113,113,0.06); border-left: 2px solid rgba(248,113,113,0.3); }
   .b5 .btn-bloque:hover { color: var(--red); }
+  .b6 .bloque-num { background: rgba(74,222,128,0.15); color: var(--green); }
+  .b6 .bloque-badge { background: rgba(74,222,128,0.1); color: var(--green); border: 1px solid rgba(74,222,128,0.2); }
+  .b6 .ejercicio .num { background: rgba(74,222,128,0.12); color: var(--green); }
+  .b6 .tip { background: rgba(74,222,128,0.06); border-left: 2px solid rgba(74,222,128,0.3); }
+  .b6 .btn-bloque:hover { color: var(--green); }
+  .b7 .bloque-num { background: rgba(251,191,36,0.15); color: var(--amber); }
+  .b7 .bloque-badge { background: rgba(251,191,36,0.1); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+  .b7 .ejercicio .num { background: rgba(251,191,36,0.12); color: var(--amber); }
+  .b7 .tip { background: rgba(251,191,36,0.06); border-left: 2px solid rgba(251,191,36,0.3); }
+  .b7 .btn-bloque:hover { color: var(--amber); }
 
+  /* EXAMEN CORRECCION */
+  .exam-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .exam-title { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .exam-title span { color: var(--red); }
+  .exam-meta { font-size: 13px; color: var(--text2); }
+  .exam-nota { display: inline-flex; align-items: center; gap: 8px; margin-top: 12px; padding: 8px 16px; background: rgba(248,113,113,0.08); border: 1px solid rgba(248,113,113,0.2); border-radius: var(--r-sm); }
+  .exam-nota .nota-num { font-family: var(--mono); font-size: 22px; font-weight: 600; color: var(--red); }
+  .exam-nota .nota-label { font-size: 12px; color: var(--text2); }
+
+  .cobertura-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; margin: 1rem 0 1.5rem; }
+  @media (max-width: 500px) { .cobertura-grid { grid-template-columns: 1fr; } }
+  .cob-item { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 14px; display: flex; align-items: center; gap: 10px; font-size: 13px; }
+  .cob-icon { font-size: 16px; flex-shrink: 0; }
+  .cob-text { flex: 1; color: var(--text2); }
+  .cob-text strong { color: var(--text); font-weight: 500; display: block; font-size: 13px; }
+  .cob-text span { font-size: 11px; }
+  .cob-item.ok { border-left: 3px solid var(--teal); }
+  .cob-item.warn { border-left: 3px solid var(--amber); }
+  .cob-item.missing { border-left: 3px solid var(--red); }
+
+  .corr-bloque { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 12px; overflow: hidden; }
+  .corr-header { display: flex; align-items: center; gap: 12px; padding: 14px 18px; cursor: pointer; user-select: none; }
+  .corr-header:hover { background: rgba(255,255,255,0.02); }
+  .corr-badge { font-size: 11px; font-family: var(--mono); padding: 3px 10px; border-radius: 20px; }
+  .corr-badge.bien { background: rgba(45,212,160,0.1); color: var(--teal); border: 1px solid rgba(45,212,160,0.2); }
+  .corr-badge.parcial { background: rgba(251,191,36,0.1); color: var(--amber); border: 1px solid rgba(251,191,36,0.2); }
+  .corr-badge.mal { background: rgba(248,113,113,0.1); color: var(--red); border: 1px solid rgba(248,113,113,0.2); }
+  .corr-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
+  .corr-body.open { display: block; }
+  .corr-titulo { font-size: 15px; font-weight: 500; flex: 1; }
+
+  .error-box { background: rgba(248,113,113,0.05); border: 1px solid rgba(248,113,113,0.2); border-radius: var(--r-sm); padding: 12px 14px; margin-bottom: 10px; font-size: 13.5px; line-height: 1.65; color: var(--text2); }
+  .error-box .error-label { font-family: var(--mono); font-size: 10px; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .ok-box { background: rgba(45,212,160,0.05); border: 1px solid rgba(45,212,160,0.2); border-radius: var(--r-sm); padding: 12px 14px; margin-bottom: 10px; font-size: 13.5px; line-height: 1.65; color: var(--text2); }
+  .ok-box .ok-label { font-family: var(--mono); font-size: 10px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .solucion-box { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px; margin: 10px 0; font-size: 13px; line-height: 1.8; color: var(--text2); }
+  .solucion-box .sol-label { font-family: var(--mono); font-size: 10px; color: var(--blue); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px; }
+  .solucion-box .paso { display: block; margin-bottom: 4px; }
+  .solucion-box .paso strong { color: var(--text); font-weight: 500; }
+  .solucion-box .resultado { color: var(--teal); font-weight: 500; font-family: var(--mono); }
+  .tabla-corr { width: 100%; border-collapse: collapse; font-size: 12.5px; margin: 10px 0; }
+  .tabla-corr th { background: var(--bg3); color: var(--text3); font-weight: 500; padding: 7px 10px; text-align: center; border: 1px solid var(--border); font-size: 11px; font-family: var(--mono); }
+  .tabla-corr td { padding: 7px 10px; text-align: center; border: 1px solid var(--border); color: var(--text2); }
+  .tabla-corr tr:nth-child(even) td { background: rgba(255,255,255,0.01); }
+  .tabla-corr td.err { color: var(--red); background: rgba(248,113,113,0.06); }
+  .tabla-corr td.ok { color: var(--teal); }
+  .arbol { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 16px; margin: 10px 0; font-family: var(--mono); font-size: 12px; line-height: 2; color: var(--text2); white-space: pre; overflow-x: auto; }
+
+  /* CHAT */
   .tutor-section { margin-top: 2rem; background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); overflow: hidden; }
   .tutor-header { padding: 16px 18px; border-bottom: 1px solid var(--border); display: flex; align-items: center; gap: 12px; }
   .tutor-avatar { width: 36px; height: 36px; border-radius: 50%; background: linear-gradient(135deg, var(--teal-dim), var(--blue-dim)); border: 1px solid rgba(45,212,160,0.25); display: flex; align-items: center; justify-content: center; font-size: 16px; }
   .tutor-name { font-size: 14px; font-weight: 500; }
   .tutor-status { font-size: 11px; color: var(--teal); font-family: var(--mono); }
-
   .chat-messages { padding: 16px 18px; min-height: 120px; max-height: 420px; overflow-y: auto; display: flex; flex-direction: column; gap: 12px; }
   .msg { display: flex; gap: 10px; }
   .msg.user { flex-direction: row-reverse; }
@@ -130,13 +195,11 @@
   .msg-ava { width: 28px; height: 28px; border-radius: 50%; flex-shrink: 0; display: flex; align-items: center; justify-content: center; font-size: 13px; margin-top: 2px; }
   .msg.bot .msg-ava { background: var(--teal-dim); border: 1px solid rgba(45,212,160,0.2); }
   .msg.user .msg-ava { background: var(--blue-dim); border: 1px solid rgba(91,156,246,0.2); }
-
   .typing { display: flex; align-items: center; gap: 4px; padding: 12px 14px; }
   .typing span { width: 6px; height: 6px; border-radius: 50%; background: var(--text3); animation: bounce 1.2s infinite; }
   .typing span:nth-child(2) { animation-delay: 0.2s; }
   .typing span:nth-child(3) { animation-delay: 0.4s; }
   @keyframes bounce { 0%,60%,100%{transform:translateY(0)} 30%{transform:translateY(-6px)} }
-
   .chat-input-wrap { padding: 12px 18px; border-top: 1px solid var(--border); display: flex; gap: 10px; align-items: flex-end; }
   .chat-input { flex: 1; background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 14px; color: var(--text); font-family: var(--font); font-size: 14px; resize: none; min-height: 42px; max-height: 120px; outline: none; transition: border-color 0.15s; }
   .chat-input::placeholder { color: var(--text3); }
@@ -145,7 +208,6 @@
   .send-btn:hover { background: rgba(91,156,246,0.2); }
   .send-btn:active { transform: scale(0.95); }
   .send-btn svg { width: 18px; height: 18px; }
-
   .quick-actions { padding: 0 18px 14px; display: flex; flex-wrap: wrap; gap: 6px; }
   .qa-btn { font-size: 12px; padding: 5px 12px; background: var(--bg3); border: 1px solid var(--border); border-radius: 20px; color: var(--text2); cursor: pointer; font-family: var(--font); transition: all 0.15s; }
   .qa-btn:hover { border-color: var(--border2); color: var(--text); background: rgba(255,255,255,0.04); }
@@ -154,11 +216,7 @@
   .footer p { font-size: 12px; color: var(--text3); }
 
   .bloque, .tutor-section, .header { animation: fadeUp 0.4s ease backwards; }
-  .bloque:nth-child(1){animation-delay:0.05s} .bloque:nth-child(2){animation-delay:0.1s}
-  .bloque:nth-child(3){animation-delay:0.15s} .bloque:nth-child(4){animation-delay:0.2s}
-  .bloque:nth-child(5){animation-delay:0.25s} .tutor-section{animation-delay:0.3s}
   @keyframes fadeUp { from{opacity:0;transform:translateY(12px)} to{opacity:1;transform:translateY(0)} }
-
   .chat-messages::-webkit-scrollbar{width:4px}
   .chat-messages::-webkit-scrollbar-track{background:transparent}
   .chat-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
@@ -167,321 +225,466 @@
 <body>
 <div class="page">
 
-  <header class="header">
-    <div class="header-top">
-      <div>
-        <h1>Plan de recuperación<br><span>Estadística y Probabilidad</span></h1>
-        <p class="header-meta">Para <strong>Daniel</strong> · <strong>1º ESO</strong> · Matemáticas</p>
-      </div>
-      <span class="header-badge">5 bloques · Nivel progresivo</span>
-    </div>
-    <div class="sesiones-label">Sesiones del plan</div>
-    <div class="sesiones-grid">
-      <div class="sesion active"><span class="ses-num">1</span>Variables</div>
-      <div class="sesion active"><span class="ses-num">2</span>Frecuencias</div>
-      <div class="sesion active"><span class="ses-num">3</span>Intervalos</div>
-      <div class="sesion active"><span class="ses-num">4</span>Gráficos</div>
-      <div class="sesion active"><span class="ses-num">5</span>Laplace</div>
-    </div>
-    <div class="progress-wrap">
-      <div class="progress-row">
-        <span class="progress-title">Bloques revisados</span>
-        <span class="progress-count" id="progLabel">0 / 5 abiertos</span>
-      </div>
-      <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
-    </div>
-  </header>
-
-  <!-- BLOQUE 1 -->
-  <div class="bloque b1">
-    <div class="bloque-header" onclick="toggle(this)">
-      <div class="bloque-num">1</div>
-      <div class="bloque-info">
-        <div class="bloque-titulo">Variables y tipos de datos</div>
-        <div class="bloque-sub">Clasificar, razonar y distinguir casos límite</div>
-      </div>
-      <span class="bloque-badge">Sesión 1</span>
-      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
-    </div>
-    <div class="bloque-body">
-      <div class="s-label">Conceptos clave</div>
-      <div class="tags">
-        <span class="tag">Variable estadística</span><span class="tag">Cualitativa</span>
-        <span class="tag">Cuantitativa</span><span class="tag">Discreta vs continua</span>
-        <span class="tag">Población y muestra</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span><span class="nivel-desc">Para asegurarte de que la base está</span></div>
-      <div class="ejercicio"><span class="num">Ej 1</span> Clasifica como cualitativa o cuantitativa: color de ojos, altura, nota del examen, deporte favorito, número de hermanos.</div>
-      <div class="ejercicio"><span class="num">Ej 2</span> ¿Discreta o continua? Número de libros leídos · Temperatura · Número de goles · Peso de una mochila.</div>
-
-      <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">Aquí hay que pensar un poco más</span></div>
-      <div class="ejercicio medio"><span class="num">Ej 3</span> Un investigador estudia si el tipo de música que escuchan los alumnos influye en su nota media. Identifica: ¿cuál es la población?, ¿qué variables intervienen?, ¿son cualitativas o cuantitativas?</div>
-      <div class="ejercicio medio"><span class="num">Ej 4</span> La variable "nivel de dolor" se mide del 1 al 10. ¿Es cuantitativa discreta o continua? ¿Y si en vez de números usaran las palabras "leve / moderado / intenso"? ¿Cambia la clasificación? Razona tu respuesta.</div>
-
-      <div class="nivel-header"><span class="nivel-pill problema">Problema</span><span class="nivel-desc">Razonamiento completo necesario</span></div>
-      <div class="ejercicio problema"><span class="num">Ej 5</span> Un colegio quiere saber si sus alumnos duermen suficientes horas. Tienen 600 alumnos y deciden encuestar a 60. Responde: (a) ¿Cuál es la población y cuál la muestra? (b) ¿Qué variable van a medir? ¿Discreta o continua? (c) Si en vez de preguntar las horas exactas preguntaran "¿Duermes poco, normal o mucho?", ¿qué tipo de variable sería ahora? (d) ¿Cuál de los dos enfoques crees que da información más útil y por qué?
-        <span class="pista">No hay una única respuesta correcta en la parte (d). Lo que importa es que justifiques tu elección.</span>
-      </div>
-
-      <div class="tip"><span>💡</span> <strong>Error frecuente en nivel medio:</strong> "temperatura" parece discreta porque usamos grados enteros, pero puede ser 36,7°. La pregunta clave es siempre: ¿físicamente puede tomar valores intermedios?</div>
-      <button class="btn-bloque" onclick="quickAsk('Quiero trabajar el bloque 1 de variables. Ya sé lo básico, ponme ejercicios donde tenga que razonar, especialmente casos donde no sea obvio si es discreta o continua.')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Practicar nivel medio y problemas con el tutor
-      </button>
-    </div>
+  <!-- TABS -->
+  <div class="nav-tabs">
+    <button class="nav-tab active" onclick="showTab('plan')">📚 Plan de estudio</button>
+    <button class="nav-tab exam-tab" onclick="showTab('examen')">📝 Corrección del examen</button>
   </div>
 
-  <!-- BLOQUE 2 -->
-  <div class="bloque b2">
-    <div class="bloque-header" onclick="toggle(this)">
-      <div class="bloque-num">2</div>
-      <div class="bloque-info">
-        <div class="bloque-titulo">Frecuencias y tablas de datos</div>
-        <div class="bloque-sub">Construir, completar e interpretar tablas con datos reales</div>
+  <!-- ==================== TAB: PLAN ==================== -->
+  <div id="tab-plan" class="tab-section active">
+
+    <header class="header">
+      <div class="header-top">
+        <div>
+          <h1>Plan de recuperación<br><span>Estadística y Probabilidad</span></h1>
+          <p class="header-meta">Para <strong>Daniel</strong> · <strong>1º ESO</strong> · Matemáticas · Nivel progresivo</p>
+        </div>
+        <span class="header-badge">7 bloques · Actualizado</span>
       </div>
-      <span class="bloque-badge">Sesión 2</span>
-      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
-    </div>
-    <div class="bloque-body">
-      <div class="s-label">Conceptos clave</div>
-      <div class="tags">
-        <span class="tag">Frecuencia absoluta (nᵢ)</span><span class="tag">Frecuencia relativa (fᵢ)</span>
-        <span class="tag">Fr. acumulada (Nᵢ)</span><span class="tag">Tabla completa</span>
+      <div class="sesiones-label">Sesiones del plan</div>
+      <div class="sesiones-grid">
+        <div class="sesion active"><span class="ses-num">1</span>Variables</div>
+        <div class="sesion active"><span class="ses-num">2</span>Frecuencias</div>
+        <div class="sesion active"><span class="ses-num">3</span>Intervalos</div>
+        <div class="sesion active"><span class="ses-num">4</span>Gráficos</div>
+        <div class="sesion active"><span class="ses-num">5</span>Laplace</div>
       </div>
-
-      <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span><span class="nivel-desc">Para asegurarte de que la base está</span></div>
-      <div class="ejercicio"><span class="num">Ej 1</span> Notas de 10 alumnos: 5, 7, 6, 8, 5, 7, 9, 6, 5, 8. Construye la tabla completa con frecuencia absoluta, relativa y acumulada.</div>
-      <div class="ejercicio"><span class="num">Ej 2</span> La frecuencia relativa de un valor es 0,25 y hay 20 datos. ¿Cuál es su frecuencia absoluta?</div>
-
-      <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">Aquí hay que pensar un poco más</span></div>
-      <div class="ejercicio medio"><span class="num">Ej 3</span> Una tabla de frecuencias tiene 5 valores distintos. Sabes que las frecuencias relativas de los tres primeros son 0,20 · 0,35 · 0,15 y que el cuarto valor aparece el doble de veces que el quinto. Si hay 40 datos en total, calcula la frecuencia absoluta de cada uno de los dos últimos valores.
-        <span class="pista">Primero calcula qué fracción del total queda para los dos últimos sumados. Luego usa la condición "el doble".</span>
+      <div class="progress-wrap">
+        <div class="progress-row">
+          <span class="progress-title">Bloques revisados</span>
+          <span class="progress-count" id="progLabel">0 / 7 abiertos</span>
+        </div>
+        <div class="progress-bar"><div class="progress-fill" id="progFill" style="width:0%"></div></div>
       </div>
-      <div class="ejercicio medio"><span class="num">Ej 4</span> En una tabla de frecuencias acumuladas, la frecuencia acumulada hasta el valor 6 es 18 y hasta el valor 7 es 25, sobre un total de 40 datos. ¿Cuántos alumnos sacaron exactamente un 7? ¿Qué porcentaje del total representa?</div>
+    </header>
 
-      <div class="nivel-header"><span class="nivel-pill problema">Problema</span><span class="nivel-desc">Razonamiento completo necesario</span></div>
-      <div class="ejercicio problema"><span class="num">Ej 5</span> Se encuesta a 30 alumnos sobre cuántas horas de pantalla tienen al día (redondeando al número entero). Los resultados son: 1, 3, 2, 4, 3, 5, 2, 3, 1, 4, 3, 2, 5, 3, 4, 2, 1, 3, 4, 5, 3, 2, 4, 3, 1, 5, 2, 3, 4, 2. (a) Construye la tabla de frecuencias completa. (b) ¿Cuántos alumnos ven pantallas 3 horas o menos al día? Usa la frecuencia acumulada. (c) ¿Cuál es el valor más frecuente? (d) La OMS recomienda máximo 2 horas al día. ¿Qué porcentaje de la clase cumple esa recomendación?
-        <span class="pista">Empieza por ordenar los valores posibles y contar cuántas veces aparece cada uno con palitos.</span>
+    <!-- BLOQUE 1 -->
+    <div class="bloque b1">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">1</div>
+        <div class="bloque-info"><div class="bloque-titulo">Variables y tipos de datos</div><div class="bloque-sub">Clasificar, razonar y distinguir casos límite</div></div>
+        <span class="bloque-badge">Sesión 1</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
       </div>
-
-      <div class="tip"><span>💡</span> <strong>Error frecuente en nivel medio:</strong> en el Ej 3, muchos intentan resolver sin darse cuenta de que la suma de TODAS las frecuencias relativas es exactamente 1. Eso es la clave para encontrar lo que falta.</div>
-      <button class="btn-bloque" onclick="quickAsk('Quiero practicar frecuencias a nivel medio. Dame un ejercicio donde tenga que deducir datos que faltan en una tabla de frecuencias incompleta.')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Practicar nivel medio y problemas con el tutor
-      </button>
-    </div>
-  </div>
-
-  <!-- BLOQUE 3 -->
-  <div class="bloque b3">
-    <div class="bloque-header" onclick="toggle(this)">
-      <div class="bloque-num">3</div>
-      <div class="bloque-info">
-        <div class="bloque-titulo">Intervalos, rango y marcas de clase</div>
-        <div class="bloque-sub">Agrupar, calcular y razonar con tablas de intervalos</div>
-      </div>
-      <span class="bloque-badge">Sesiones 2–3</span>
-      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
-    </div>
-    <div class="bloque-body">
-      <div class="s-label">Conceptos clave</div>
-      <div class="tags">
-        <span class="tag">Rango</span><span class="tag">Intervalo [a, b)</span>
-        <span class="tag">Amplitud</span><span class="tag">Marca de clase</span><span class="tag">Tabla agrupada</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span><span class="nivel-desc">Para asegurarte de que la base está</span></div>
-      <div class="ejercicio"><span class="num">Ej 1</span> Estaturas: 152, 165, 170, 158, 172, 161, 168, 155. Calcula el rango y forma intervalos de amplitud 10 a partir del valor mínimo.</div>
-      <div class="ejercicio"><span class="num">Ej 2</span> Calcula la marca de clase de los intervalos [150, 160) y [160, 170). ¿Qué representa ese valor?</div>
-
-      <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">Aquí hay que pensar un poco más</span></div>
-      <div class="ejercicio medio"><span class="num">Ej 3</span> Los tiempos (en segundos) de 12 corredores en 100 metros son: 11,2 · 12,8 · 11,5 · 13,1 · 12,0 · 11,8 · 13,5 · 12,3 · 11,9 · 12,6 · 13,0 · 11,4. (a) Calcula el rango. (b) Agrupa en intervalos de amplitud 1 segundo. (c) Construye la tabla con marcas de clase y frecuencias absolutas. (d) ¿En qué intervalo están más agrupados los corredores?</div>
-      <div class="ejercicio medio"><span class="num">Ej 4</span> Una tabla agrupada tiene intervalos [0,10) [10,20) [20,30) [30,40) con frecuencias 4, 11, 9 y 6 respectivamente. (a) ¿Cuántos datos hay en total? (b) ¿Qué porcentaje de datos está por debajo de 20? (c) Si alguien te dice que "la mayoría de los datos están entre 10 y 30", ¿es cierto? Justifícalo con los números.
-        <span class="pista">Para la parte (c), calcula qué porcentaje representan esos dos intervalos juntos sobre el total.</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill problema">Problema</span><span class="nivel-desc">Razonamiento completo necesario</span></div>
-      <div class="ejercicio problema"><span class="num">Ej 5</span> Se miden los pesos (en kg) de 20 estudiantes: 48, 55, 61, 52, 67, 71, 58, 49, 63, 55, 70, 57, 64, 52, 68, 46, 59, 73, 51, 65. (a) Calcula el rango. (b) Decide una amplitud razonable para los intervalos y justifica por qué la has elegido. (c) Construye la tabla agrupada con marcas de clase, frecuencia absoluta, relativa y acumulada. (d) ¿Qué porcentaje de estudiantes pesa entre 55 y 70 kg? (e) El intervalo con más estudiantes, ¿tiene también la marca de clase más alta? Razona sin calcular.
-        <span class="pista">En la parte (b) no hay una respuesta única: con el rango calculado, piensa cuántos intervalos quedarían bien (entre 4 y 6 suele ser lo ideal).</span>
-      </div>
-
-      <div class="tip"><span>💡</span> <strong>Trampa habitual:</strong> en el Ej 5 parte (e) muchos responden sin pensar. La marca de clase más alta corresponde al intervalo con los valores más grandes, no al más frecuente. Son cosas distintas.</div>
-      <button class="btn-bloque" onclick="quickAsk('Quiero practicar intervalos y marcas de clase a nivel medio. Dame datos reales para que yo elija la amplitud y construya la tabla desde cero.')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Practicar nivel medio y problemas con el tutor
-      </button>
-    </div>
-  </div>
-
-  <!-- BLOQUE 4 -->
-  <div class="bloque b4">
-    <div class="bloque-header" onclick="toggle(this)">
-      <div class="bloque-num">4</div>
-      <div class="bloque-info">
-        <div class="bloque-titulo">Histogramas y diagramas estadísticos</div>
-        <div class="bloque-sub">Leer, interpretar y detectar errores en gráficos</div>
-      </div>
-      <span class="bloque-badge">Sesión 3</span>
-      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
-    </div>
-    <div class="bloque-body">
-      <div class="s-label">Conceptos clave</div>
-      <div class="tags">
-        <span class="tag">Histograma</span><span class="tag">Diagrama de barras</span>
-        <span class="tag">Diagrama de sectores</span><span class="tag">Polígono de frecuencias</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span><span class="nivel-desc">Para asegurarte de que la base está</span></div>
-      <div class="ejercicio"><span class="num">Ej 1</span> ¿En qué se diferencia un histograma de un diagrama de barras? Da un ejemplo de cuándo usarías cada uno.</div>
-      <div class="ejercicio"><span class="num">Ej 2</span> El 40% practica fútbol, 30% baloncesto, 20% natación y 10% otro deporte. ¿Cuántos grados corresponde a cada sector en un diagrama circular?</div>
-
-      <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">Aquí hay que pensar un poco más</span></div>
-      <div class="ejercicio medio"><span class="num">Ej 3</span> Un histograma tiene 4 barras con alturas (frecuencias) 3, 8, 12 y 5, correspondientes a los intervalos [0,10) [10,20) [20,30) [30,40). (a) ¿Cuántos datos hay en total? (b) ¿Qué porcentaje del total representa la barra más alta? (c) Dibuja a mano alzada el polígono de frecuencias para ese histograma. (d) ¿Podría representarse esta misma información con un diagrama de barras clásico? ¿Por qué sí o por qué no?</div>
-      <div class="ejercicio medio"><span class="num">Ej 4</span> En un diagrama de sectores sobre medios de transporte, el sector del autobús mide 108°. (a) ¿Qué porcentaje representa el autobús? (b) Si 45 personas van en autobús, ¿cuántas personas hay en total en el estudio? (c) Si el sector del coche mide el doble que el del metro y juntos ocupan el resto del diagrama, ¿cuántos grados ocupa cada uno?
-        <span class="pista">Para (a) recuerda que 360° es el 100%. Para (c) primero calcula cuántos grados quedan después del autobús.</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill problema">Problema</span><span class="nivel-desc">Razonamiento completo necesario</span></div>
-      <div class="ejercicio problema"><span class="num">Ej 5</span> Tienes los resultados de las notas de un examen de 25 alumnos agrupadas en la tabla: [0,5): 2 alumnos · [5,6): 4 alumnos · [6,7): 9 alumnos · [7,8): 6 alumnos · [8,10): 4 alumnos. (a) Dibuja el histograma con los ejes correctamente etiquetados. Atención: el último intervalo tiene el doble de amplitud, ¿cómo afecta eso a la altura de la barra? (b) ¿Qué porcentaje de alumnos aprobó (nota ≥ 5)? (c) Un periódico del colegio quiere publicar el gráfico y dice: "la mayoría sacó entre 6 y 7". ¿Es correcto? Justifícalo. (d) ¿Qué gráfico usarías para comparar estas notas con las del examen anterior: otro histograma, un diagrama de barras doble, o un diagrama de sectores? Razona.
-        <span class="pista">En la parte (a): cuando un intervalo tiene el doble de amplitud, para que el área de la barra sea proporcional a la frecuencia, la altura debe ser la mitad. Esto es lo que distingue un buen histograma de uno mal dibujado.</span>
-      </div>
-
-      <div class="tip"><span>💡</span> <strong>El detalle que casi nadie controla:</strong> en un histograma correcto, lo que representa la frecuencia es el ÁREA de la barra, no su altura. Cuando los intervalos tienen distinta amplitud, las alturas deben ajustarse. Esto suele caer en los exámenes más exigentes.</div>
-      <button class="btn-bloque" onclick="quickAsk('Quiero practicar interpretación de histogramas y diagramas a nivel medio. Dame un gráfico descrito con datos y pregúntame cosas sobre él.')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Practicar nivel medio y problemas con el tutor
-      </button>
-    </div>
-  </div>
-
-  <!-- BLOQUE 5 -->
-  <div class="bloque b5">
-    <div class="bloque-header" onclick="toggle(this)">
-      <div class="bloque-num">5</div>
-      <div class="bloque-info">
-        <div class="bloque-titulo">Probabilidad y regla de Laplace</div>
-        <div class="bloque-sub">Calcular, combinar sucesos y razonar sobre el azar</div>
-      </div>
-      <span class="bloque-badge">Sesión 4</span>
-      <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
-    </div>
-    <div class="bloque-body">
-      <div class="s-label">Conceptos clave</div>
-      <div class="tags">
-        <span class="tag">Espacio muestral</span><span class="tag">Suceso</span>
-        <span class="tag">Regla de Laplace</span><span class="tag">Suceso contrario</span>
-        <span class="tag">P(A) = fav / posibles</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span><span class="nivel-desc">Para asegurarte de que la base está</span></div>
-      <div class="ejercicio"><span class="num">Ej 1</span> Lanzamos un dado de 6 caras. ¿Probabilidad de obtener un número par? Escribe el espacio muestral y aplica Laplace.</div>
-      <div class="ejercicio"><span class="num">Ej 2</span> Bolsa con 3 bolas rojas, 2 azules y 5 verdes. ¿Probabilidad de sacar una azul? ¿Y de que no sea roja?</div>
-
-      <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">Aquí hay que pensar un poco más</span></div>
-      <div class="ejercicio medio"><span class="num">Ej 3</span> Una baraja española tiene 40 cartas (4 palos: oros, copas, espadas y bastos; cada palo con cartas del 1 al 10). Se saca una carta al azar. Calcula: (a) P(sacar un as) (b) P(sacar una carta de oros) (c) P(sacar un número mayor que 7) (d) P(sacar el 3 de copas) (e) P(no sacar espadas).</div>
-      <div class="ejercicio medio"><span class="num">Ej 4</span> En una clase hay 15 alumnos: 6 que solo estudian, 5 que solo hacen deporte, y 4 que hacen ambas cosas. Se elige un alumno al azar. (a) ¿Cuál es la probabilidad de elegir a alguien que haga deporte? (b) ¿Y alguien que solo estudie? (c) ¿Cuál es la probabilidad de que el elegido NO haga deporte?
-        <span class="pista">En la parte (a) cuenta todos los que hacen deporte, tanto los que solo hacen deporte como los que hacen ambas cosas.</span>
-      </div>
-
-      <div class="nivel-header"><span class="nivel-pill problema">Problema</span><span class="nivel-desc">Razonamiento completo necesario</span></div>
-      <div class="ejercicio problema"><span class="num">Ej 5</span> En una tómbola de fin de curso hay 50 bolas numeradas del 1 al 50. (a) ¿Cuál es la probabilidad de sacar un múltiplo de 5? (b) ¿Y un número par mayor que 30? (c) ¿Y un número que sea a la vez múltiplo de 3 y de 4? (d) Un alumno dice: "como hay 25 números pares y 25 impares, la probabilidad de sacar par o impar es la misma, así que da igual". ¿Está en lo correcto? ¿En qué situación su razonamiento podría fallar? (e) Si se sacan 3 bolas seguidas SIN reponerlas y las tres primeras son el 10, el 20 y el 30, ¿cambia la probabilidad de sacar un múltiplo de 5 en la cuarta extracción respecto al inicio? Razona.
-        <span class="pista">Para (c) escribe los múltiplos de 3 y los de 4 por separado, luego busca los que están en ambas listas. Para (e) piensa cuántos múltiplos de 5 quedaban después de las tres primeras extracciones y cuántas bolas en total.</span>
-      </div>
-
-      <div class="tip"><span>💡</span> <strong>Concepto que rompe esquemas:</strong> en el Ej 5 parte (e), cuando se sacan bolas SIN reponer, el espacio muestral cambia en cada extracción. Laplace sigue funcionando, pero hay que recalcular cada vez. Esto es probabilidad condicionada (no entra en 1º ESO, pero el razonamiento sí).</div>
-      <button class="btn-bloque" onclick="quickAsk('Quiero practicar probabilidad y Laplace a nivel medio. Dame problemas donde tenga que identificar bien los casos favorables, especialmente con sucesos compuestos.')">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
-        Practicar nivel medio y problemas con el tutor
-      </button>
-    </div>
-  </div>
-
-  <!-- TUTOR CHAT -->
-  <div class="tutor-section">
-    <div class="tutor-header">
-      <div class="tutor-avatar">🎓</div>
-      <div>
-        <div class="tutor-name">Tutor de Matemáticas</div>
-        <div class="tutor-status">● disponible</div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Variable estadística</span><span class="tag">Cualitativa</span><span class="tag">Cuantitativa</span><span class="tag">Discreta vs continua</span><span class="tag">Población y muestra</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span><span class="nivel-desc">Base asegurada</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> Clasifica como cualitativa o cuantitativa: color de ojos, altura, nota del examen, deporte favorito, número de hermanos.</div>
+        <div class="ejercicio"><span class="num">Ej 2</span> ¿Discreta o continua? Número de libros leídos · Temperatura · Número de goles · Peso de una mochila.</div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">Hay que pensar</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> La variable "nivel de dolor" se mide del 1 al 10. ¿Es cuantitativa discreta o continua? ¿Y si usan "leve / moderado / intenso"? ¿Cambia la clasificación? Razona.</div>
+        <div class="ejercicio medio"><span class="num">Ej 4</span> Un colegio encuesta a 60 de sus 600 alumnos sobre horas de sueño. ¿Población y muestra? ¿Qué variable miden? ¿Discreta o continua? Si en vez de horas exactas preguntaran "¿duermes poco/normal/mucho?", ¿cambia el tipo?</div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema</span><span class="nivel-desc">Razonamiento completo</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 5</span> Un investigador estudia si las horas de pantalla influyen en la nota media. Identifica todas las variables involucradas, clasifícalas, di cuál es la población razonable y propón una muestra. Justifica cada respuesta.<span class="pista">No hay una respuesta única. Lo que cuenta es la justificación.</span></div>
+        <div class="tip">💡 <strong>Error frecuente:</strong> "temperatura" parece discreta porque usamos grados enteros, pero puede ser 36,7°. La clave siempre es: ¿puede tomar valores intermedios físicamente?</div>
+        <button class="btn-bloque" onclick="quickAsk('Quiero practicar variables estadísticas a nivel medio. Dame casos ambiguos donde no sea obvio si es discreta o continua.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
       </div>
     </div>
-    <div class="chat-messages" id="chatMessages">
-      <div class="msg bot">
-        <div class="msg-ava">🎓</div>
-        <div class="msg-bubble">¡Hola Daniel! Veo que los ejercicios básicos ya los tienes controlados, así que he subido el nivel en cada bloque. Ahora hay tres capas: calentamiento, nivel medio y un problema de razonamiento.<br><br>Los problemas están pensados para que no puedas resolverlos de memoria — hay que pensar. Si te atascas, dime en cuál y lo vemos juntos paso a paso. 💪</div>
+
+    <!-- BLOQUE 2 -->
+    <div class="bloque b2">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">2</div>
+        <div class="bloque-info"><div class="bloque-titulo">Frecuencias y tablas de datos</div><div class="bloque-sub">Construir, completar e interpretar — incluido el error del examen</div></div>
+        <span class="bloque-badge">Sesión 2</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Frecuencia absoluta (nᵢ)</span><span class="tag">Frecuencia relativa (fᵢ)</span><span class="tag">Fr. acumulada (Nᵢ)</span><span class="tag">Porcentaje</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> Notas de 10 alumnos: 5, 7, 6, 8, 5, 7, 9, 6, 5, 8. Tabla completa: absoluta, relativa, acumulada y porcentaje.</div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span><span class="nivel-desc">El error de Daniel: confundir absoluta con acumulada en la relativa</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 2</span> Esta tabla tiene un error. Encuéntralo y corrígelo:<br><br>
+          Valor 4 → n=3, N=3, f=3/20=0,15<br>
+          Valor 6 → n=5, N=8, f=8/20=0,40 ← ¿está bien esta frecuencia relativa?<br>
+          Valor 8 → n=7, N=15, f=15/20=0,75<br>
+          Valor 10 → n=5, N=20, f=20/20=1,00<span class="pista">La frecuencia relativa se calcula con la frecuencia ABSOLUTA de ese valor, no con la acumulada.</span>
+        </div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> Las frecuencias relativas de 5 valores son: 0,20 · 0,35 · 0,15 · ? · ? El cuarto valor aparece el doble de veces que el quinto. Hay 40 datos. Calcula las frecuencias absolutas de los dos valores desconocidos.</div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 4</span> 30 alumnos respondieron cuántas horas ven pantallas al día: 1,3,2,4,3,5,2,3,1,4,3,2,5,3,4,2,1,3,4,5,3,2,4,3,1,5,2,3,4,2. (a) Tabla completa. (b) ¿Cuántos ven 3h o menos? (c) La OMS recomienda máximo 2h. ¿Qué % cumple? (d) ¿Cuál es el valor más frecuente?<span class="pista">Empieza contando con palitos cuántas veces aparece cada valor.</span></div>
+        <div class="tip">💡 <strong>El error del examen de Daniel:</strong> calculó la frecuencia relativa dividiendo la frecuencia ACUMULADA entre el total, en lugar de la ABSOLUTA. fᵢ = nᵢ/N, no Nᵢ/N.</div>
+        <button class="btn-bloque" onclick="quickAsk('Tengo una tabla de frecuencias con datos y quiero que me corrijas si cometo el error de usar la frecuencia acumulada en lugar de la absoluta para calcular la relativa.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
       </div>
     </div>
-    <div class="quick-actions">
-      <button class="qa-btn" onclick="quickAsk('Corrígeme este ejercicio que he intentado: en una bolsa hay 3 rojas, 2 azules y 5 verdes. He calculado P(no roja) = 7/10. ¿Está bien?')">Corrígeme un ejercicio</button>
-      <button class="qa-btn" onclick="quickAsk('Dame un problema difícil de Laplace con sucesos compuestos, tipo los del bloque 5.')">Problema difícil de Laplace</button>
-      <button class="qa-btn" onclick="quickAsk('Explícame qué es el suceso contrario y cómo se usa en probabilidad, con ejemplos.')">Suceso contrario</button>
-      <button class="qa-btn" onclick="quickAsk('Haz un simulacro de examen de recuperación de estadística y probabilidad para 1º ESO, nivel medio-alto, con 6 preguntas variadas y dificultad progresiva.')">Simulacro nivel medio</button>
-    </div>
-    <div class="chat-input-wrap">
-      <textarea class="chat-input" id="chatInput" placeholder="Escribe tu pregunta, ejercicio o resultado para que te lo corrija..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
-      <button class="send-btn" onclick="sendMessage()" aria-label="Enviar">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/>
-        </svg>
-      </button>
-    </div>
-  </div>
 
-  <footer class="footer">
-    <p>Plan de recuperación · Estadística y Probabilidad · 1º ESO · Nivel progresivo</p>
-  </footer>
+    <!-- BLOQUE 3 -->
+    <div class="bloque b3">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">3</div>
+        <div class="bloque-info"><div class="bloque-titulo">Intervalos, rango y marcas de clase</div><div class="bloque-sub">Agrupar, calcular y razonar con tablas de intervalos</div></div>
+        <span class="bloque-badge">Sesiones 2–3</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Rango</span><span class="tag">Intervalo [a, b)</span><span class="tag">Amplitud</span><span class="tag">Marca de clase</span><span class="tag">Tabla agrupada</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> Estaturas: 152, 165, 170, 158, 172, 161, 168, 155. Calcula el rango y forma intervalos de amplitud 10. Calcula marcas de clase.</div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 2</span> Tiempos de 12 corredores (s): 11,2 · 12,8 · 11,5 · 13,1 · 12,0 · 11,8 · 13,5 · 12,3 · 11,9 · 12,6 · 13,0 · 11,4. (a) Rango. (b) Agrupa en intervalos de amplitud 1s. (c) Tabla con marcas de clase y frecuencias. (d) ¿En qué intervalo están más agrupados?</div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> Tabla con intervalos [0,10) [10,20) [20,30) [30,40) y frecuencias 4, 11, 9, 6. (a) Total de datos. (b) % por debajo de 20. (c) ¿Es cierto que "la mayoría está entre 10 y 30"? Justifícalo con números.</div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 4</span> Pesos de 20 alumnos (kg): 48,55,61,52,67,71,58,49,63,55,70,57,64,52,68,46,59,73,51,65. (a) Rango. (b) Elige amplitud razonada y justifícala. (c) Tabla completa con marcas de clase, absoluta, relativa, acumulada. (d) % entre 55 y 70 kg. (e) ¿El intervalo más frecuente tiene la marca de clase más alta? Razona sin calcular.<span class="pista">Para (b): con el rango calculado, busca una amplitud que dé entre 4 y 6 intervalos.</span></div>
+        <div class="tip">💡 La marca de clase más alta es la del intervalo con valores más grandes, no la del más frecuente. Son cosas distintas.</div>
+        <button class="btn-bloque" onclick="quickAsk('Dame datos para que yo elija la amplitud de los intervalos y construya la tabla desde cero. Quiero practicar el proceso completo.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
+      </div>
+    </div>
 
-</div>
+    <!-- BLOQUE 4 -->
+    <div class="bloque b4">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">4</div>
+        <div class="bloque-info"><div class="bloque-titulo">Histogramas y diagramas estadísticos</div><div class="bloque-sub">Leer, interpretar y detectar errores en gráficos</div></div>
+        <span class="bloque-badge">Sesión 3</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Histograma</span><span class="tag">Diagrama de barras</span><span class="tag">Diagrama de sectores</span><span class="tag">Polígono de frecuencias</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> ¿En qué se diferencia un histograma de un diagrama de barras? Da un ejemplo de cuándo usar cada uno.</div>
+        <div class="ejercicio"><span class="num">Ej 2</span> El 40% fútbol, 30% baloncesto, 20% natación, 10% otro. ¿Cuántos grados en el diagrama circular?</div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> Histograma con barras de alturas 3, 8, 12 y 5 para [0,10) [10,20) [20,30) [30,40). (a) Total datos. (b) % de la barra más alta. (c) Dibuja el polígono de frecuencias. (d) ¿Podría representarse con barras clásicas? ¿Por qué?</div>
+        <div class="ejercicio medio"><span class="num">Ej 4</span> Diagrama de sectores: autobús = 108°. (a) ¿Qué % es? (b) Si 45 personas van en autobús, ¿cuántas hay en total? (c) El coche mide el doble que el metro y juntos completan el resto. ¿Grados de cada uno?<span class="pista">Para (c): primero calcula cuántos grados quedan después del autobús.</span></div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 5</span> Notas de 25 alumnos: [0,5)→2, [5,6)→4, [6,7)→9, [7,8)→6, [8,10)→4. (a) Dibuja el histograma. ¡Ojo: el último intervalo tiene el doble de amplitud, ¿cómo afecta a la altura? (b) % que aprobó. (c) ¿Es correcto decir "la mayoría sacó entre 6 y 7"? (d) ¿Qué gráfico usarías para comparar con el examen anterior?<span class="pista">Cuando un intervalo tiene el doble de amplitud, su altura debe ser la mitad para que el área sea proporcional a la frecuencia.</span></div>
+        <div class="tip">💡 En un histograma correcto lo que representa la frecuencia es el ÁREA de la barra, no solo su altura.</div>
+        <button class="btn-bloque" onclick="quickAsk('Descríbeme un histograma con datos y pregúntame cosas sobre él para practicar interpretación.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
+      </div>
+    </div>
+
+    <!-- BLOQUE 5 -->
+    <div class="bloque b5">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">5</div>
+        <div class="bloque-info"><div class="bloque-titulo">Probabilidad y regla de Laplace</div><div class="bloque-sub">Sucesos simples, compuestos y contrarios</div></div>
+        <span class="bloque-badge">Sesión 4</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Espacio muestral</span><span class="tag">Suceso</span><span class="tag">Regla de Laplace</span><span class="tag">Suceso contrario</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> Dado de 6 caras. ¿P(número par)? Escribe el espacio muestral y aplica Laplace.</div>
+        <div class="ejercicio"><span class="num">Ej 2</span> Bolsa: 3 bolas rojas, 2 azules, 5 verdes. ¿P(azul)? ¿P(no roja)?</div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> Baraja española (40 cartas, palos del 1 al 10). Calcula: (a) P(as) (b) P(oros) (c) P(mayor que 7) (d) P(3 de copas) (e) P(no espadas).</div>
+        <div class="ejercicio medio"><span class="num">Ej 4</span> Clase de 15 alumnos: 6 solo estudian, 5 solo deporte, 4 ambas cosas. (a) P(hace deporte) (b) P(solo estudia) (c) P(no hace deporte).<span class="pista">En (a) cuenta todos los que hacen deporte: los de "solo deporte" más los de "ambas cosas".</span></div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 5</span> Tómbola con bolas del 1 al 50. (a) P(múltiplo de 5) (b) P(par mayor que 30) (c) P(múltiplo de 3 Y de 4) (d) ¿Es igual P(par) que P(impar)? ¿Cuándo podría no serlo? (e) Si las 3 primeras bolas sacadas son el 10, 20 y 30, ¿cambia P(múltiplo de 5) para la siguiente? Razona.<span class="pista">Para (c) escribe múltiplos de 3 y de 4 por separado y busca los comunes.</span></div>
+        <div class="tip">💡 Cuando se saca sin reponer, el espacio muestral cambia en cada extracción. Laplace sigue funcionando pero hay que recalcular.</div>
+        <button class="btn-bloque" onclick="quickAsk('Quiero practicar Laplace con sucesos compuestos. Dame problemas donde tenga que identificar bien los casos favorables.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
+      </div>
+    </div>
+
+    <!-- BLOQUE 6 — NUEVO: MODA, MEDIANA, MEDIA -->
+    <div class="bloque b6">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">6</div>
+        <div class="bloque-info">
+          <div class="bloque-titulo">Moda, mediana y media aritmética <span style="font-size:11px;font-family:var(--mono);background:rgba(74,222,128,0.15);color:var(--green);padding:2px 8px;border-radius:10px;margin-left:6px;">NUEVO</span></div>
+          <div class="bloque-sub">Parámetros de centralización — salió en el examen y no estaba en el plan</div>
+        </div>
+        <span class="bloque-badge">Sesión 4</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Moda (Mo)</span><span class="tag">Mediana (Me)</span><span class="tag">Media aritmética (x̄)</span><span class="tag">Datos ordenados</span><span class="tag">Marca de clase en media</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento — conceptos</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> Con los datos 3, 5, 7, 5, 9, 5, 2, 8: (a) ¿Cuál es la moda? (b) Ordénalos y encuentra la mediana. (c) Calcula la media aritmética.</div>
+        <div class="ejercicio"><span class="num">Ej 2</span> Datos: 4, 6, 4, 8, 6, 9, 6, 4. ¿Cuántas modas tiene? ¿Qué significa eso?</div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio — con tabla de frecuencias</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> Tabla de notas: valor 5 → n=3, valor 6 → n=5, valor 7 → n=8, valor 8 → n=4. (a) ¿Cuál es la moda? (b) Hay 20 datos. ¿Cuál es la mediana? (c) Calcula la media usando: x̄ = (Σ xᵢ·nᵢ) / N.<span class="pista">Para la mediana: busca el valor en la posición 10 y 11 al ordenar. Con la frecuencia acumulada puedes ver en qué valor cae esa posición.</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 4</span> Con los datos del examen de Daniel (horas de estudio de 30 alumnos): 5,8,12,6,9,7,10,11,5,8,13,6,9,7,10,12,11,5,8,6,10,9,7,13,11,12,5,8,7,9. Calcula moda, mediana y media. ¿Coinciden? ¿Qué nos dice eso sobre la distribución?</div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema — media con datos agrupados</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 5</span> Con la tabla agrupada del examen ([4,6)→4, [6,8)→7, [8,10)→8, [10,12)→6, [12,14)→5): (a) Calcula las marcas de clase de cada intervalo. (b) Usa la fórmula x̄ = (Σ marcaᵢ × nᵢ) / N para calcular la media. (c) ¿Por qué usamos la marca de clase y no el intervalo completo? (d) Compara este resultado con la media exacta del Ej 4. ¿Son iguales? ¿Por qué no?<span class="pista">La marca de clase es el representante del intervalo. Al agrupar perdemos información exacta, por eso la media agrupada es una aproximación.</span></div>
+        <div class="tip">💡 <strong>Error de Daniel en el examen:</strong> en la moda dijo que era 5, 7, 8 y 9. Los valores 8 y 9 aparecen 4 veces cada uno y son los más frecuentes, junto con 5 (también 4 veces). Hay que contar, no adivinar.</div>
+        <button class="btn-bloque" onclick="quickAsk('Explícame cómo calcular la moda, mediana y media con una tabla de frecuencias. Quiero entender la diferencia entre los tres.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
+      </div>
+    </div>
+
+    <!-- BLOQUE 7 — NUEVO: DIAGRAMA DE ÁRBOL Y SIN REPOSICIÓN -->
+    <div class="bloque b7">
+      <div class="bloque-header" onclick="toggleBloque(this)">
+        <div class="bloque-num">7</div>
+        <div class="bloque-info">
+          <div class="bloque-titulo">Diagrama de árbol y probabilidad sin reposición <span style="font-size:11px;font-family:var(--mono);background:rgba(74,222,128,0.15);color:var(--green);padding:2px 8px;border-radius:10px;margin-left:6px;">NUEVO</span></div>
+          <div class="bloque-sub">El ejercicio 2 del examen — el que más puntos costó</div>
+        </div>
+        <span class="bloque-badge">Sesión 5</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="bloque-body">
+        <div class="s-label">Conceptos clave</div>
+        <div class="tags"><span class="tag">Diagrama de árbol</span><span class="tag">Sin reposición</span><span class="tag">Probabilidad compuesta</span><span class="tag">Multiplicar ramas</span><span class="tag">Fracciones exactas</span></div>
+        <div class="nivel-header"><span class="nivel-pill basico">Calentamiento — con reposición</span></div>
+        <div class="ejercicio"><span class="num">Ej 1</span> Bolsa con 2 bolas rojas (R) y 3 azules (A). Se sacan dos bolas CON reposición. (a) Dibuja el diagrama de árbol completo. (b) ¿Cuántas combinaciones posibles hay? (c) Calcula P(RR), P(RA), P(AR), P(AA).<span class="pista">Con reposición, las probabilidades de la segunda extracción son iguales a las de la primera.</span></div>
+        <div class="nivel-header"><span class="nivel-pill medio">Nivel medio — sin reposición (como en el examen)</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 2</span> Misma bolsa: 2 rojas y 3 azules. Se sacan dos bolas SIN reposición. (a) Dibuja el árbol. Fíjate: después de sacar la primera, ¿cuántas bolas quedan? ¿Cambian las probabilidades? (b) P(dos rojas) (c) P(primera roja, segunda azul) (d) P(una de cada color, en cualquier orden) (e) P(mismo color).<span class="pista">Sin reposición: si la primera es R, quedan 1R y 3A de 4 bolas totales. Si la primera es A, quedan 2R y 2A de 4 bolas totales.</span></div>
+        <div class="ejercicio medio"><span class="num">Ej 3</span> Bolsa con 7 bolas violetas y 3 naranjas (el ejercicio exacto del examen). Sin reposición, dos extracciones. (a) Árbol completo con fracciones exactas. (b) P(naranja en 1ª extracción) (c) P(dos violetas) (d) P(naranja y luego violeta) (e) P(mismo color en ambas).<span class="pista">Denominador de la primera extracción: 10. De la segunda: 9. Usa SIEMPRE fracciones, no decimales aproximados.</span></div>
+        <div class="nivel-header"><span class="nivel-pill problema">Problema</span></div>
+        <div class="ejercicio problema"><span class="num">Ej 4</span> En una caja hay 4 bolas rojas, 3 azules y 2 verdes. Se extraen dos sin reposición. (a) ¿Cuántas combinaciones posibles de colores hay en el árbol? (b) P(las dos del mismo color) (c) P(al menos una roja) — pista: usa el suceso contrario. (d) ¿Es más probable sacar dos del mismo color o dos de distinto color? Compara los resultados.<span class="pista">Para (c): P(al menos una roja) = 1 − P(ninguna roja). Es más fácil calcular lo contrario.</span></div>
+        <div class="tip">💡 <strong>El error grave del examen:</strong> Daniel multiplicó decimales aproximados (0,47 × 0,53) en vez de fracciones exactas (3/10 × 7/9). Con fracciones el resultado es exacto. Con decimales redondeados, el error se acumula y el resultado puede estar muy lejos.</div>
+        <button class="btn-bloque" onclick="quickAsk('Explícame cómo hacer un diagrama de árbol sin reposición desde cero. Quiero entender por qué cambian las probabilidades en la segunda extracción.')"><svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg> Practicar con el tutor</button>
+      </div>
+    </div>
+
+    <!-- CHAT -->
+    <div class="tutor-section">
+      <div class="tutor-header">
+        <div class="tutor-avatar">🎓</div>
+        <div><div class="tutor-name">Tutor de Matemáticas</div><div class="tutor-status">● disponible</div></div>
+      </div>
+      <div class="chat-messages" id="chatMessages">
+        <div class="msg bot">
+          <div class="msg-ava">🎓</div>
+          <div class="msg-bubble">¡Hola Daniel! He revisado tu examen y he añadido dos bloques nuevos: moda/mediana/media (bloque 6) y diagramas de árbol sin reposición (bloque 7), que son exactamente los temas donde más puntos se fueron.<br><br>También hay una pestaña de corrección del examen donde puedes ver exactamente qué salió bien y dónde estuvo cada error, con la solución paso a paso. 📋<br><br>¿Por dónde empezamos?</div>
+        </div>
+      </div>
+      <div class="quick-actions">
+        <button class="qa-btn" onclick="quickAsk('Explícame el diagrama de árbol sin reposición desde cero con un ejemplo fácil.')">Árbol sin reposición</button>
+        <button class="qa-btn" onclick="quickAsk('¿Cómo se calcula la mediana cuando hay 30 datos ordenados?')">Cómo calcular la mediana</button>
+        <button class="qa-btn" onclick="quickAsk('Dame un ejercicio de probabilidad con bolas sin reposición para practicar.')">Practicar bolas sin reposición</button>
+        <button class="qa-btn" onclick="quickAsk('Haz un simulacro de examen completo de estadística y probabilidad de 1º ESO incluyendo moda, mediana, media y diagrama de árbol.')">Simulacro completo</button>
+      </div>
+      <div class="chat-input-wrap">
+        <textarea class="chat-input" id="chatInput" placeholder="Escribe tu pregunta o ejercicio..." rows="1" onkeydown="handleKey(event)" oninput="autoResize(this)"></textarea>
+        <button class="send-btn" onclick="sendMessage()" aria-label="Enviar">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="22" y1="2" x2="11" y2="13"/><polygon points="22 2 15 22 11 13 2 9 22 2"/></svg>
+        </button>
+      </div>
+    </div>
+
+  </div><!-- fin tab-plan -->
+
+  <!-- ==================== TAB: EXAMEN ==================== -->
+  <div id="tab-examen" class="tab-section">
+
+    <div class="exam-header">
+      <div class="exam-title">Corrección del examen <span>— Daniel Quesada</span></div>
+      <div class="exam-meta">EXAMEN Estadística y probabilidad · 4ª Evaluación · 1º ESO · 01/05/2026</div>
+      <div class="exam-nota">
+        <span class="nota-num">0,75</span>
+        <div class="nota-label">Nota obtenida<br><span style="font-size:10px;color:var(--text3);">sobre 10 puntos</span></div>
+      </div>
+    </div>
+
+    <div class="s-label" style="margin-top:0">Cobertura del plan vs temas del examen</div>
+    <div class="cobertura-grid">
+      <div class="cob-item ok"><span class="cob-icon">✅</span><div class="cob-text"><strong>Tabla de frecuencias</strong><span>Bloques 2 y 3</span></div></div>
+      <div class="cob-item ok"><span class="cob-icon">✅</span><div class="cob-text"><strong>Marca de clase</strong><span>Bloque 3</span></div></div>
+      <div class="cob-item ok"><span class="cob-icon">✅</span><div class="cob-text"><strong>Frecuencia relativa y acumulada</strong><span>Bloque 2</span></div></div>
+      <div class="cob-item ok"><span class="cob-icon">✅</span><div class="cob-text"><strong>Histograma</strong><span>Bloque 4</span></div></div>
+      <div class="cob-item ok"><span class="cob-icon">✅</span><div class="cob-text"><strong>Regla de Laplace</strong><span>Bloque 5</span></div></div>
+      <div class="cob-item warn"><span class="cob-icon">⚠️</span><div class="cob-text"><strong>Probabilidad sin reposición</strong><span>Mencionada, ahora en Bloque 7</span></div></div>
+      <div class="cob-item missing"><span class="cob-icon">🆕</span><div class="cob-text"><strong>Moda, mediana, media</strong><span>No estaba — añadido en Bloque 6</span></div></div>
+      <div class="cob-item missing"><span class="cob-icon">🆕</span><div class="cob-text"><strong>Diagrama de árbol</strong><span>No estaba — añadido en Bloque 7</span></div></div>
+    </div>
+
+    <!-- EJERCICIO 1 -->
+    <div class="s-label" style="margin-top:1.5rem">Corrección ejercicio por ejercicio</div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicio 1a — Tabla de frecuencias con intervalos</div>
+        <span class="corr-badge parcial">Parcial</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="ok-box"><span class="ok-label">✅ Lo que hizo bien</span>Las frecuencias absolutas están casi todas correctas (4, 7, 8, 6, 5). Las marcas de clase también son correctas (5, 7, 9, 11, 12,5). Identificó bien los 5 intervalos de amplitud 2.</div>
+        <div class="error-box"><span class="error-label">❌ Error principal — frecuencias relativas</span>Calculó fᵢ dividiendo la frecuencia <strong>acumulada</strong> entre el total, en lugar de la <strong>absoluta</strong>. Por ejemplo para [4,6): puso 7/30 = 0,23 cuando debería ser 4/30 = 0,13. Como consecuencia, todos los porcentajes también son incorrectos.</div>
+        <div class="error-box"><span class="error-label">❌ Error secundario — frecuencias acumuladas</span>La columna de acumuladas tiene números duplicados y confusos (74, 1515, 2822…). La acumulada se construye sumando progresivamente: 4 → 11 → 19 → 25 → 30.</div>
+        <div class="solucion-box">
+          <span class="sol-label">✔ Solución correcta</span>
+          Datos: 5,8,12,6,9,7,10,11,5,8,13,6,9,7,10,12,11,5,8,6,10,9,7,13,11,12,5,8,7,9
+          <table class="tabla-corr" style="margin-top:10px">
+            <tr><th>Intervalo</th><th>Mc</th><th>nᵢ</th><th>Nᵢ (acum.)</th><th>fᵢ</th><th>%</th></tr>
+            <tr><td>[4, 6)</td><td>5</td><td class="ok">4</td><td class="ok">4</td><td class="ok">0,13</td><td class="ok">13,33%</td></tr>
+            <tr><td>[6, 8)</td><td>7</td><td class="ok">7</td><td class="ok">11</td><td class="ok">0,23</td><td class="ok">23,33%</td></tr>
+            <tr><td>[8, 10)</td><td>9</td><td class="ok">8</td><td class="ok">19</td><td class="ok">0,27</td><td class="ok">26,67%</td></tr>
+            <tr><td>[10, 12)</td><td>11</td><td class="ok">6</td><td class="ok">25</td><td class="ok">0,20</td><td class="ok">20,00%</td></tr>
+            <tr><td>[12, 14)</td><td>13</td><td class="ok">5</td><td class="ok">30</td><td class="ok">0,17</td><td class="ok">16,67%</td></tr>
+            <tr><td><strong>Total</strong></td><td>—</td><td><strong>30</strong></td><td>—</td><td><strong>1,00</strong></td><td><strong>100%</strong></td></tr>
+          </table>
+          <span class="paso" style="margin-top:10px;display:block">⚠️ Nota: el enunciado dice que el último intervalo debe contener el dato más grande (13). Por eso es [12,14) y no [12,13). La marca de clase sería (12+14)/2 = 13, no 12,5.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicio 1b — ¿Cuántos estudian entre 8 y 10 horas?</div>
+        <span class="corr-badge bien">Correcto</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="ok-box"><span class="ok-label">✅ Correcto</span>Daniel respondió 8 alumnos, que es exactamente la frecuencia absoluta del intervalo [8, 10). Bien identificado.</div>
+      </div>
+    </div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicio 1c — ¿Qué porcentaje estudia menos de 8 horas?</div>
+        <span class="corr-badge mal">Incorrecto</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="error-box"><span class="error-label">❌ Error</span>Daniel calculó 1,61 − 2,08 = 3,69% → redondeó a 36%. Hay dos errores: usó los porcentajes incorrectos de la tabla (ya erróneos por el fallo anterior) y además la resta no tiene sentido para calcular un porcentaje acumulado.</div>
+        <div class="solucion-box">
+          <span class="sol-label">✔ Solución correcta</span>
+          <span class="paso">Menos de 8 horas = intervalos [4,6) y [6,8)</span>
+          <span class="paso">nᵢ de [4,6) = 4 alumnos</span>
+          <span class="paso">nᵢ de [6,8) = 7 alumnos</span>
+          <span class="paso">Total que estudian menos de 8h = 4 + 7 = <strong>11 alumnos</strong></span>
+          <span class="paso">Porcentaje = 11/30 × 100 = <span class="resultado">36,67%</span></span>
+          <span class="paso" style="margin-top:8px;color:var(--text3);font-size:12px">Curioso: el resultado numérico (≈36%) coincide por casualidad con el de Daniel, pero el procedimiento era completamente incorrecto.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicio 1b — Moda, mediana y media aritmética</div>
+        <span class="corr-badge parcial">Parcial</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="error-box"><span class="error-label">❌ Moda — incompleta</span>Daniel dijo "5, 7, 8 y 9". Contando los datos reales: el 5 aparece 4 veces, el 7 aparece 5 veces, el 8 aparece 4 veces, el 9 aparece 4 veces. <strong>La moda es el 7</strong> (es el que más se repite). Daniel no contó bien y no justificó con frecuencias.</div>
+        <div class="ok-box"><span class="ok-label">✅ Mediana — proceso correcto</span>Ordenó los 30 datos correctamente. La mediana de 30 datos es la media de los valores en las posiciones 15 y 16. Al ordenar, ambas posiciones corresponden al valor 9, así que la mediana es 9. Daniel identificó correctamente el intervalo [8,10) como zona de la mediana.</div>
+        <div class="error-box"><span class="error-label">❌ Media aritmética — error de cálculo</span>El planteamiento con marcas de clase era correcto (x̄ = Σ mcᵢ·nᵢ / N), pero los cálculos numéricos tienen errores. Obtuvo 8,23 y 8,98 en distintos intentos.</div>
+        <div class="solucion-box">
+          <span class="sol-label">✔ Solución correcta</span>
+          <span class="paso"><strong>Moda:</strong> contando frecuencias absolutas...</span>
+          <span class="paso">Valor 5 → 4 veces | Valor 6 → 3 veces | Valor 7 → 5 veces</span>
+          <span class="paso">Valor 8 → 4 veces | Valor 9 → 4 veces | Valor 10 → 3 veces</span>
+          <span class="paso">Valor 11 → 3 veces | Valor 12 → 3 veces | Valor 13 → 2 veces</span>
+          <span class="paso">Moda = <span class="resultado">7</span> (aparece 5 veces, más que ningún otro)</span>
+          <span class="paso" style="margin-top:8px"><strong>Mediana:</strong> 30 datos → posiciones 15 y 16</span>
+          <span class="paso">Ordenados: pos. 15 = 9, pos. 16 = 9 → Mediana = <span class="resultado">9</span></span>
+          <span class="paso" style="margin-top:8px"><strong>Media con tabla agrupada:</strong></span>
+          <span class="paso">5×4 + 7×7 + 9×8 + 11×6 + 13×5 = 20+49+72+66+65 = 272</span>
+          <span class="paso">x̄ = 272 / 30 = <span class="resultado">9,07</span></span>
+          <span class="paso" style="margin-top:8px;color:var(--text3);font-size:12px">* Con marcas de clase el resultado es aproximado. La media exacta de los datos sería 8,77.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicio 2a — Diagrama de árbol (bolas sin reposición)</div>
+        <span class="corr-badge parcial">Parcial</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="ok-box"><span class="ok-label">✅ Estructura correcta</span>Daniel dibujó el árbol con dos niveles y cuatro ramas finales (VV, VA, AV, AA). La estructura es correcta.</div>
+        <div class="error-box"><span class="error-label">❌ Fracciones incorrectas</span>Las probabilidades de las ramas no son correctas. Con 7 bolas violetas (V) y 3 naranjas (A) y sin reposición: primera extracción → P(V)=7/10, P(A)=3/10. Segunda (si salió V) → P(V)=6/9, P(A)=3/9. Segunda (si salió A) → P(V)=7/9, P(A)=2/9.</div>
+        <div class="solucion-box">
+          <span class="sol-label">✔ Árbol correcto</span>
+          <div class="arbol">              7 bolas V, 3 bolas A (total 10)
+
+          ┌── V (7/10) ──┬── V (6/9) → VV: 7/10 × 6/9 = 42/90
+          │              └── A (3/9) → VA: 7/10 × 3/9 = 21/90
+INICIO ──┤
+          └── A (3/10) ──┬── V (7/9) → AV: 3/10 × 7/9 = 21/90
+                         └── A (2/9) → AA: 3/10 × 2/9 =  6/90
+
+Comprobación: 42+21+21+6 = 90/90 = 1 ✓</div>
+        </div>
+      </div>
+    </div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicios 2b–2e — Cálculos de probabilidad</div>
+        <span class="corr-badge mal">Con errores</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="error-box"><span class="error-label">❌ Error sistemático — decimales en lugar de fracciones</span>Daniel usó decimales aproximados (0,47 y 0,53) para calcular probabilidades compuestas. Esto introduce errores de redondeo y los resultados son incorrectos. Siempre hay que usar fracciones exactas y multiplicar ramas del árbol.</div>
+        <div class="solucion-box">
+          <span class="sol-label">✔ Soluciones correctas</span>
+          <span class="paso"><strong>(b) P(1ª bola naranja)</strong> = 3/10 = <span class="resultado">0,30</span></span>
+          <span class="paso"><strong>(c) P(dos violetas)</strong> = 7/10 × 6/9 = 42/90 = 7/15 ≈ <span class="resultado">0,47</span></span>
+          <span class="paso"><strong>(d) P(naranja y luego violeta)</strong> = 3/10 × 7/9 = 21/90 = 7/30 ≈ <span class="resultado">0,23</span></span>
+          <span class="paso"><strong>(e) P(mismo color)</strong> = P(VV) + P(AA) = 42/90 + 6/90 = 48/90 = 8/15 ≈ <span class="resultado">0,53</span></span>
+          <span class="paso" style="margin-top:8px;color:var(--text3);font-size:12px">La regla de oro: en probabilidades compuestas, SIEMPRE fracciones. Nunca decimales intermedios.</span>
+        </div>
+      </div>
+    </div>
+
+    <div class="corr-bloque">
+      <div class="corr-header" onclick="toggleCorr(this)">
+        <div class="corr-titulo">Ejercicio c — Representar serie estadística en histograma</div>
+        <span class="corr-badge parcial">Parcial</span>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="corr-body">
+        <div class="ok-box"><span class="ok-label">✅ Intentó representarlo</span>Daniel dibujó un histograma con barras. La idea de usar barras contiguas es correcta para datos agrupados.</div>
+        <div class="error-box"><span class="error-label">❌ A mejorar</span>Los ejes no están correctamente etiquetados. Las alturas de las barras no corresponden claramente a las frecuencias de la tabla. Para recuperación: asegúrate de que cada barra tiene la altura exacta de la frecuencia absoluta y el eje X muestra los límites de los intervalos.</div>
+        <div class="solucion-box">
+          <span class="sol-label">✔ Cómo debe quedar el histograma</span>
+          <span class="paso">Eje X: límites de intervalos → 4, 6, 8, 10, 12, 14</span>
+          <span class="paso">Eje Y: frecuencia absoluta → escala del 0 al 8 (mínimo)</span>
+          <span class="paso">Barras: [4,6)→altura 4 | [6,8)→altura 7 | [8,10)→altura 8 | [10,12)→altura 6 | [12,14)→altura 5</span>
+          <span class="paso">Las barras deben estar pegadas (sin espacio entre ellas)</span>
+        </div>
+      </div>
+    </div>
+
+  </div><!-- fin tab-examen -->
+
+  <footer class="footer"><p>Plan de recuperación · Estadística y Probabilidad · 1º ESO · Incluye corrección del examen</p></footer>
+
+</div><!-- fin page -->
 
 <script>
 const API_URL = "https://api.anthropic.com/v1/messages";
+const SYSTEM_PROMPT = `Eres un tutor de matemáticas paciente, claro y motivador para Daniel, un estudiante de 13 años en 1º de ESO que va a recuperación de estadística y probabilidad. Daniel ya tiene la base pero cometió errores concretos en su examen.
 
-const SYSTEM_PROMPT = `Eres un tutor de matemáticas paciente, claro y motivador para Daniel, un estudiante de 13 años en 1º de ESO que va a recuperación de estadística y probabilidad. Daniel ya domina los conceptos básicos y necesita ejercicios de nivel medio y problemas de razonamiento.
+Errores conocidos de Daniel que debes tener en cuenta:
+1. Confunde frecuencia absoluta con acumulada al calcular la relativa (fᵢ = nᵢ/N, no Nᵢ/N)
+2. Usa decimales aproximados en probabilidades compuestas en lugar de fracciones exactas
+3. No cuenta bien para encontrar la moda — dice de memoria en lugar de contar
+4. En el diagrama de árbol sin reposición no ajusta los denominadores de la segunda extracción
 
-Tu estilo:
-- Cercano, sin tecnicismos innecesarios, con humor suave
-- Explicas PASO A PASO numerando cada paso
-- Nunca dices "esto es fácil"
-- Cuando corriges un error, explicas exactamente dónde está el fallo y por qué
-- Propones siempre un ejercicio de práctica después de explicar
-- Usas ejemplos cotidianos
-- Para nivel medio y problemas, haces preguntas guía antes de dar la solución completa
+Tu estilo: cercano, sin tecnicismos innecesarios, humor suave, paso a paso, nunca dices "esto es fácil", señalas errores específicos, propones ejercicios de práctica.
 
-Nivel de dificultad que debes usar por defecto: MEDIO-ALTO. Daniel ya sabe lo básico.
+Nivel por defecto: MEDIO-ALTO. Daniel ya sabe lo básico.
 
-Temas dominados:
-- Variables estadísticas con casos límite y ambiguos
-- Tablas de frecuencias incompletas (deducir datos que faltan)
-- Intervalos, rango, elección de amplitud razonada, marcas de clase
-- Interpretación y crítica de histogramas y diagramas
-- Laplace con sucesos compuestos (múltiplos, condiciones dobles, suceso contrario)
+Temas del examen: tabla de frecuencias con intervalos, marca de clase, frecuencias relativas y acumuladas, histograma, moda/mediana/media, diagrama de árbol sin reposición, regla de Laplace.
 
-Cuando resuelvas ejercicios usa este formato:
-Ejercicio: [enuncia con palabras sencillas]
-Idea clave: [qué hay que pensar]
-Paso a paso:
-1. ...
-2. ...
-Resultado: ...
-¿Lo has pillado? Ahora intenta tú: [ejercicio similar ligeramente diferente]
-
+Cuando resuelvas ejercicios: Ejercicio → Idea clave → Paso a paso → Resultado → ¿Lo has pillado? → Ejercicio similar.
 Responde siempre en español.`;
 
 let history = [];
 
-function toggle(header) {
+function showTab(name) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
+function toggleBloque(header) {
   const body = header.nextElementSibling;
   const chevron = header.querySelector('.chevron');
   body.classList.toggle('open');
   chevron.classList.toggle('open');
-  updateProgress();
-}
+  const open = document.querySelectorAll('#tab-plan .bloque-body.open').length;
+  document.getElementById('progFill').style.width = (open / 7 * 100) + '%';
+  document.getElementById('progLabel').textContent = open + ' / 7 abiertos';}
 
-function updateProgress() {
-  const open = document.querySelectorAll('.bloque-body.open').length;
-  document.getElementById('progFill').style.width = (open / 5 * 100) + '%';
-  document.getElementById('progLabel').textContent = open + ' / 5 abiertos';
+function toggleCorr(header) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
 }
 
 function autoResize(el) {
@@ -508,21 +711,17 @@ function addMessage(role, text) {
   const bubble = document.createElement('div');
   bubble.className = 'msg-bubble';
   bubble.innerHTML = text.replace(/\n/g, '<br>');
-  div.appendChild(ava);
-  div.appendChild(bubble);
+  div.appendChild(ava); div.appendChild(bubble);
   wrap.appendChild(div);
   wrap.scrollTop = wrap.scrollHeight;
-  return bubble;
 }
 
 function showTyping() {
   const wrap = document.getElementById('chatMessages');
   const div = document.createElement('div');
-  div.className = 'msg bot';
-  div.id = 'typingIndicator';
+  div.className = 'msg bot'; div.id = 'typingIndicator';
   div.innerHTML = '<div class="msg-ava">🎓</div><div class="msg-bubble"><div class="typing"><span></span><span></span><span></span></div></div>';
-  wrap.appendChild(div);
-  wrap.scrollTop = wrap.scrollHeight;
+  wrap.appendChild(div); wrap.scrollTop = wrap.scrollHeight;
 }
 
 function removeTyping() {
@@ -530,12 +729,31 @@ function removeTyping() {
   if (t) t.remove();
 }
 
+const API_URL = "https://api.anthropic.com/v1/messages";
+const SYSTEM_PROMPT = `Eres un tutor de matemáticas paciente, claro y motivador para Daniel, un estudiante de 13 años en 1º de ESO que va a recuperación de estadística y probabilidad. Daniel ya tiene la base pero cometió errores concretos en su examen.
+
+Errores conocidos de Daniel:
+1. Confunde frecuencia absoluta con acumulada al calcular la relativa (fᵢ = nᵢ/N, no Nᵢ/N)
+2. Usa decimales aproximados en probabilidades compuestas en lugar de fracciones exactas
+3. No cuenta bien para encontrar la moda
+4. En el diagrama de árbol sin reposición no ajusta los denominadores de la segunda extracción
+
+Nivel por defecto: MEDIO-ALTO. Responde siempre en español. Formato: Ejercicio → Idea clave → Paso a paso → Resultado → Ejercicio similar.`;
+
+let history = [];
+
+function showTab(name) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+  event.target.classList.add('active');
+}
+
 async function sendMessage() {
   const input = document.getElementById('chatInput');
   const text = input.value.trim();
   if (!text) return;
-  input.value = '';
-  input.style.height = 'auto';
+  input.value = ''; input.style.height = 'auto';
   addMessage('user', text);
   history.push({ role: 'user', content: text });
   showTyping();
@@ -543,12 +761,7 @@ async function sendMessage() {
     const res = await fetch(API_URL, {
       method: 'POST',
       headers: { 'Content-Type': 'application/json' },
-      body: JSON.stringify({
-        model: 'claude-sonnet-4-20250514',
-        max_tokens: 1000,
-        system: SYSTEM_PROMPT,
-        messages: history
-      })
+      body: JSON.stringify({ model: 'claude-sonnet-4-20250514', max_tokens: 1000, system: SYSTEM_PROMPT, messages: history })
     });
     const data = await res.json();
     removeTyping();
@@ -558,7 +771,7 @@ async function sendMessage() {
     if (history.length > 20) history = history.slice(-20);
   } catch (err) {
     removeTyping();
-    addMessage('bot', 'Hubo un problema de conexión. Comprueba tu internet e inténtalo de nuevo.');
+    addMessage('bot', 'Hubo un problema de conexión. Inténtalo de nuevo.');
   }
 }
 </script>
