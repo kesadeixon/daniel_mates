@@ -29,6 +29,8 @@
   .nav-tab:hover { border-color: var(--border2); color: var(--text); }
   .nav-tab.active { background: var(--blue-dim); border-color: rgba(91,156,246,0.4); color: var(--blue); }
   .nav-tab.exam-tab.active { background: rgba(248,113,113,0.1); border-color: rgba(248,113,113,0.35); color: var(--red); }
+  .nav-tab.arbol-tab.active { background: rgba(74,222,128,0.1); border-color: rgba(74,222,128,0.35); color: var(--green); }
+  .nav-tab.histo-tab.active { background: rgba(251,191,36,0.1); border-color: rgba(251,191,36,0.35); color: var(--amber); }
 
   .tab-section { display: none; }
   .tab-section.active { display: block; }
@@ -220,6 +222,54 @@
   .chat-messages::-webkit-scrollbar{width:4px}
   .chat-messages::-webkit-scrollbar-track{background:transparent}
   .chat-messages::-webkit-scrollbar-thumb{background:var(--border2);border-radius:10px}
+
+  /* ARBOL SESSION */
+  .session-header { margin-bottom: 2rem; padding-bottom: 1.5rem; border-bottom: 1px solid var(--border); }
+  .session-title { font-size: 22px; font-weight: 600; margin-bottom: 6px; }
+  .session-title span { color: var(--green); }
+  .session-meta { font-size: 13px; color: var(--text2); line-height: 1.6; }
+  .step-card { background: var(--bg2); border: 1px solid var(--border); border-radius: var(--r); margin-bottom: 14px; overflow: hidden; }
+  .step-card-header { display: flex; align-items: center; gap: 14px; padding: 14px 18px; cursor: pointer; user-select: none; }
+  .step-card-header:hover { background: rgba(255,255,255,0.02); }
+  .step-num { width: 34px; height: 34px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 13px; font-weight: 700; flex-shrink: 0; font-family: var(--mono); background: rgba(74,222,128,0.15); color: var(--green); }
+  .step-info { flex: 1; }
+  .step-titulo { font-size: 14px; font-weight: 500; color: var(--text); }
+  .step-sub { font-size: 12px; color: var(--text3); margin-top: 2px; }
+  .step-body { display: none; padding: 0 18px 18px; border-top: 1px solid var(--border); }
+  .step-body.open { display: block; }
+  .concepto-box { background: rgba(74,222,128,0.06); border: 1px solid rgba(74,222,128,0.2); border-radius: var(--r-sm); padding: 14px 16px; margin: 12px 0; font-size: 13.5px; line-height: 1.7; color: var(--text2); }
+  .concepto-box strong { color: var(--text); font-weight: 500; }
+  .concepto-box .titulo-concepto { font-family: var(--mono); font-size: 10px; color: var(--green); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px; }
+  .arbol-visual { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 16px 18px; margin: 12px 0; font-family: var(--mono); font-size: 12.5px; line-height: 2.0; color: var(--text2); overflow-x: auto; white-space: pre; }
+  .arbol-visual .ok { color: var(--teal); font-weight: 500; }
+  .arbol-visual .err { color: var(--red); }
+  .arbol-visual .label { color: var(--blue); }
+  .error-daniel { background: rgba(248,113,113,0.06); border: 1px solid rgba(248,113,113,0.2); border-left: 3px solid var(--red); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13px; line-height: 1.65; color: var(--text2); }
+  .error-daniel .err-label { font-family: var(--mono); font-size: 10px; color: var(--red); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .correcto-box { background: rgba(45,212,160,0.06); border: 1px solid rgba(45,212,160,0.2); border-left: 3px solid var(--teal); border-radius: var(--r-sm); padding: 12px 14px; margin: 10px 0; font-size: 13px; line-height: 1.65; color: var(--text2); }
+  .correcto-box .ok-label { font-family: var(--mono); font-size: 10px; color: var(--teal); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .paso-a-paso { counter-reset: paso; margin: 10px 0; }
+  .paso { display: flex; gap: 12px; margin-bottom: 10px; align-items: flex-start; }
+  .paso-n { counter-increment: paso; width: 24px; height: 24px; border-radius: 50%; background: var(--blue-dim); border: 1px solid rgba(91,156,246,0.3); color: var(--blue); font-size: 11px; font-weight: 600; display: flex; align-items: center; justify-content: center; flex-shrink: 0; margin-top: 1px; font-family: var(--mono); }
+  .paso-txt { font-size: 13.5px; color: var(--text2); line-height: 1.65; flex: 1; }
+  .paso-txt strong { color: var(--text); }
+  .practica-card { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 14px 16px; margin: 12px 0; }
+  .practica-card .practica-label { font-family: var(--mono); font-size: 10px; color: var(--amber); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 8px; }
+  .practica-card p { font-size: 13.5px; color: var(--text2); line-height: 1.65; margin-bottom: 6px; }
+  .practica-card p strong { color: var(--text); }
+  .regla-box { background: rgba(167,139,250,0.07); border: 1px solid rgba(167,139,250,0.25); border-radius: var(--r-sm); padding: 12px 16px; margin: 10px 0; font-size: 13.5px; color: var(--text2); line-height: 1.7; }
+  .regla-box .regla-label { font-family: var(--mono); font-size: 10px; color: var(--purple); text-transform: uppercase; letter-spacing: 0.08em; display: block; margin-bottom: 6px; }
+  .regla-box strong { color: var(--text); }
+  .progress-session { display: flex; gap: 8px; margin-bottom: 1.5rem; flex-wrap: wrap; }
+  .prog-dot { width: 32px; height: 8px; border-radius: 10px; background: var(--bg3); border: 1px solid var(--border); transition: background 0.3s; }
+  .prog-dot.done { background: var(--green); border-color: rgba(74,222,128,0.4); }
+  .resumen-final { background: var(--bg2); border: 1px solid rgba(74,222,128,0.25); border-radius: var(--r); padding: 18px; margin-top: 1rem; }
+  .resumen-final h3 { font-size: 15px; font-weight: 600; color: var(--green); margin-bottom: 12px; }
+  .formula-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 8px; }
+  @media (max-width: 500px) { .formula-grid { grid-template-columns: 1fr; } }
+  .formula-item { background: var(--bg3); border: 1px solid var(--border); border-radius: var(--r-sm); padding: 10px 14px; }
+  .formula-item .f-label { font-size: 11px; color: var(--text3); font-family: var(--mono); display: block; margin-bottom: 4px; }
+  .formula-item .f-val { font-size: 13px; color: var(--text); font-family: var(--mono); }
 </style>
 </head>
 <body>
@@ -229,6 +279,8 @@
   <div class="nav-tabs">
     <button class="nav-tab active" onclick="showTab('plan')">📚 Plan de estudio</button>
     <button class="nav-tab exam-tab" onclick="showTab('examen')">📝 Corrección del examen</button>
+    <button class="nav-tab arbol-tab" onclick="showTab('arbol')">🌳 Sesión: Diagrama de árbol</button>
+    <button class="nav-tab histo-tab" onclick="showTab('histo')">📊 Sesión: Histogramas</button>
   </div>
 
   <!-- ==================== TAB: PLAN ==================== -->
@@ -639,6 +691,597 @@ Comprobación: 42+21+21+6 = 90/90 = 1 ✓</div>
 
   </div><!-- fin tab-examen -->
 
+
+  <!-- ==================== TAB: ARBOL ==================== -->
+  <div id="tab-arbol" class="tab-section">
+
+    <div class="session-header">
+      <div class="session-title">Sesión especial: <span>Diagrama de árbol</span></div>
+      <p class="session-meta">Esta sesión está diseñada para dominar el único tema que aún falla.<br>
+      En el simulacro de hoy el árbol salió a <strong>0/2</strong> — con esta sesión lo convertimos en 2/2.</p>
+    </div>
+
+    <div class="progress-session" id="sessionProgress">
+      <div class="prog-dot" id="pd0"></div>
+      <div class="prog-dot" id="pd1"></div>
+      <div class="prog-dot" id="pd2"></div>
+      <div class="prog-dot" id="pd3"></div>
+      <div class="prog-dot" id="pd4"></div>
+      <div class="prog-dot" id="pd5"></div>
+    </div>
+
+    <!-- PASO 1: La idea clave -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStep(this, 0)">
+        <div class="step-num">1</div>
+        <div class="step-info">
+          <div class="step-titulo">¿Qué es un diagrama de árbol?</div>
+          <div class="step-sub">La idea antes de los números</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="concepto-box">
+          <span class="titulo-concepto">Concepto</span>
+          Un diagrama de árbol es un dibujo que muestra <strong>todas las combinaciones posibles</strong> cuando hacemos varias extracciones seguidas.<br><br>
+          Cada <strong>rama</strong> representa un resultado posible. Al final de cada camino multiplicamos las probabilidades de las ramas que hemos recorrido para obtener la probabilidad de esa combinación.<br><br>
+          <strong>Regla de oro:</strong> la suma de todas las probabilidades finales siempre tiene que dar exactamente 1.
+        </div>
+        <div class="concepto-box">
+          <span class="titulo-concepto">La diferencia clave: con reposición vs sin reposición</span>
+          <strong>Con reposición:</strong> después de sacar una bola, la devuelves. La bolsa siempre tiene las mismas bolas. Las probabilidades no cambian.<br><br>
+          <strong>Sin reposición:</strong> la bola que sacas NO vuelve. En la segunda extracción hay una bola menos. <strong>El denominador baja en 1.</strong> Este es exactamente el error que salió en el simulacro de hoy.
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2: El error del simulacro -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStep(this, 1)">
+        <div class="step-num">2</div>
+        <div class="step-info">
+          <div class="step-titulo">El error de hoy — qué pasó exactamente</div>
+          <div class="step-sub">Bolsa con 4 azules y 6 verdes, sin reposición</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="error-daniel">
+          <span class="err-label">❌ Lo que hizo Daniel hoy</span>
+          En la segunda extracción usó denominador <strong>10</strong> igual que en la primera. Por ejemplo calculó V,V = 6/10 × 5/10.<br><br>
+          Consecuencia: la suma final dio 0,96 en vez de 1. Eso es la señal de alarma — si no da 1, algo está mal.
+        </div>
+        <div class="correcto-box">
+          <span class="ok-label">✅ Cómo debe hacerse</span>
+          Primera extracción: hay <strong>10 bolas</strong> → denominador 10.<br>
+          Segunda extracción: ya salió una bola, quedan <strong>9</strong> → denominador <strong>9</strong> siempre.<br><br>
+          Pero además el numerador también cambia según lo que salió primero:
+          <ul style="margin-top:8px; padding-left:18px; line-height:2">
+            <li>Si salió <strong>Azul</strong> primero → quedan 3 azules y 6 verdes (9 en total)</li>
+            <li>Si salió <strong>Verde</strong> primero → quedan 4 azules y 5 verdes (9 en total)</li>
+          </ul>
+        </div>
+        <div class="arbol-visual">  4A + 6V = 10 bolas en total
+
+              ┌─ A (3/9) ──→  A,A    P = 4/10 × 3/9 = 12/90
+  ┌─ A (4/10)─┤
+  │           └─ V (6/9) ──→  A,V    P = 4/10 × 6/9 = 24/90
+  ┤
+  └─ V (6/10)─┬─ A (4/9) ──→  V,A    P = 6/10 × 4/9 = 24/90
+              └─ V (5/9) ──→  V,V    P = 6/10 × 5/9 = 30/90
+
+  Suma: 12 + 24 + 24 + 30 = 90/90 = 1 ✓</div>
+        <div class="regla-box">
+          <span class="regla-label">📌 Regla para recordar siempre</span>
+          Si en la primera extracción sacas una bola de color X:<br>
+          → El numerador de ese color <strong>baja en 1</strong> para la segunda<br>
+          → El denominador <strong>siempre baja en 1</strong> (de N a N−1)<br>
+          → Los demás colores <strong>no cambian</strong>
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 3: Construir paso a paso -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStep(this, 2)">
+        <div class="step-num">3</div>
+        <div class="step-info">
+          <div class="step-titulo">Método paso a paso para construir cualquier árbol</div>
+          <div class="step-sub">Un sistema que siempre funciona</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="paso-a-paso">
+          <div class="paso">
+            <div class="paso-n">1</div>
+            <div class="paso-txt"><strong>Escribe cuántas bolas hay de cada color y el total.</strong><br>Ejemplo: 3 rojas (R), 2 azules (A) → total 5.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">2</div>
+            <div class="paso-txt"><strong>Primera extracción:</strong> el denominador es el total (5). Escribe una rama por cada color con su fracción: R → 3/5, A → 2/5.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">3</div>
+            <div class="paso-txt"><strong>Para cada rama de la segunda extracción:</strong> el denominador es total−1 (4). El numerador del color que salió baja en 1; el otro color no cambia.<br>
+            Si salió R primero → segunda rama: R(2/4), A(2/4)<br>
+            Si salió A primero → segunda rama: R(3/4), A(1/4)</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">4</div>
+            <div class="paso-txt"><strong>Calcula cada probabilidad final</strong> multiplicando las dos ramas del camino. Usa fracciones, nunca decimales intermedios.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">5</div>
+            <div class="paso-txt"><strong>Comprueba:</strong> suma todas las probabilidades finales. Si no da 1, hay un error en alguna rama. Encuéntralo antes de seguir.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">6</div>
+            <div class="paso-txt"><strong>Para responder preguntas:</strong> localiza los caminos del árbol que cumplen la condición y suma sus probabilidades.</div>
+          </div>
+        </div>
+        <div class="arbol-visual">  3R + 2A = 5 bolas
+
+            ┌─ R (2/4) ──→  R,R    3/5 × 2/4 =  6/20
+  ┌─ R (3/5)─┤
+  │           └─ A (2/4) ──→  R,A    3/5 × 2/4 =  6/20
+  ┤
+  └─ A (2/5)─┬─ R (3/4) ──→  A,R    2/5 × 3/4 =  6/20
+              └─ A (1/4) ──→  A,A    2/5 × 1/4 =  2/20
+
+  Suma: 6+6+6+2 = 20/20 = 1 ✓</div>
+      </div>
+    </div>
+
+    <!-- PASO 4: Calcular con el árbol -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStep(this, 3)">
+        <div class="step-num">4</div>
+        <div class="step-info">
+          <div class="step-titulo">Cómo responder preguntas usando el árbol</div>
+          <div class="step-sub">Mismo color, al menos uno, suceso contrario</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <p style="font-size:13.5px;color:var(--text2);margin:12px 0 8px">Usamos el árbol del paso 3 (3R + 2A, sin reposición) para responder distintos tipos de pregunta:</p>
+
+        <div class="concepto-box">
+          <span class="titulo-concepto">Tipo 1 — Un resultado concreto</span>
+          <strong>P(R,A) — primera roja, segunda azul</strong><br>
+          Busca ese camino en el árbol → R,A = 6/20 = <strong>3/10</strong>
+        </div>
+        <div class="concepto-box">
+          <span class="titulo-concepto">Tipo 2 — Mismo color (dos caminos)</span>
+          <strong>P(mismo color)</strong> = P(R,R) + P(A,A)<br>
+          = 6/20 + 2/20 = <strong>8/20 = 2/5</strong><br><br>
+          Cuando hay varias combinaciones que cumplen la condición, se <strong>suman</strong> sus probabilidades.
+        </div>
+        <div class="concepto-box">
+          <span class="titulo-concepto">Tipo 3 — "Al menos uno" → suceso contrario</span>
+          <strong>P(al menos una roja)</strong><br>
+          Lo contrario de "al menos una roja" es "ninguna roja" = A,A = 2/20<br>
+          P(al menos una R) = 1 − 2/20 = <strong>18/20 = 9/10</strong><br><br>
+          El truco del suceso contrario es muy útil cuando "al menos uno" incluye muchos caminos.
+        </div>
+        <div class="regla-box">
+          <span class="regla-label">📌 Resumen de tipos de pregunta</span>
+          <strong>Un camino concreto</strong> → multiplica sus dos ramas<br>
+          <strong>Varios caminos válidos</strong> → calcula cada uno y súmalos<br>
+          <strong>"Al menos uno"</strong> → usa siempre el suceso contrario: 1 − P(ninguno)
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 5: Practica guiada -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStep(this, 4)">
+        <div class="step-num">5</div>
+        <div class="step-info">
+          <div class="step-titulo">Ejercicios de práctica — de menos a más</div>
+          <div class="step-sub">Tres ejercicios para consolidar, con pistas</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="practica-card">
+          <span class="practica-label">🟢 Ejercicio 1 — Calentamiento (con reposición, para fijar la base)</span>
+          <p>Una bolsa tiene <strong>2 bolas rojas (R) y 3 bolas azules (A)</strong>. Se sacan dos bolas <strong>CON reposición</strong>.</p>
+          <p><strong>a)</strong> Construye el árbol completo con fracciones en cada rama.</p>
+          <p><strong>b)</strong> Calcula P(R,R), P(R,A), P(A,R), P(A,A).</p>
+          <p><strong>c)</strong> Comprueba que suman 1.</p>
+          <p class="ejercicio pista" style="margin-top:8px;font-size:12px;color:var(--text3);font-style:italic">💭 Con reposición el denominador no cambia: siempre es 5 en ambas extracciones.</p>
+        </div>
+        <div class="practica-card">
+          <span class="practica-label">🟡 Ejercicio 2 — Nivel medio (sin reposición, el mismo tipo que el examen)</span>
+          <p>Misma bolsa: <strong>2 rojas y 3 azules</strong>. Ahora <strong>SIN reposición</strong>.</p>
+          <p><strong>a)</strong> Construye el árbol. ¿Qué cambia respecto al ejercicio 1?</p>
+          <p><strong>b)</strong> P(las dos del mismo color)</p>
+          <p><strong>c)</strong> P(al menos una azul) — usa el suceso contrario</p>
+          <p><strong>d)</strong> Comprueba que las cuatro probabilidades finales suman 1.</p>
+          <p class="ejercicio pista" style="margin-top:8px;font-size:12px;color:var(--text3);font-style:italic">💭 Sin reposición: segunda extracción tiene denominador 4. Si salió R primero → quedan 1R y 3A. Si salió A primero → quedan 2R y 2A.</p>
+        </div>
+        <div class="practica-card">
+          <span class="practica-label">🔴 Ejercicio 3 — Nivel examen (tres colores)</span>
+          <p>Una caja tiene <strong>3 bolas rojas (R), 2 azules (A) y 1 verde (V)</strong>. Se sacan dos <strong>SIN reposición</strong>.</p>
+          <p><strong>a)</strong> ¿Cuántas ramas tiene el árbol completo?</p>
+          <p><strong>b)</strong> P(las dos rojas)</p>
+          <p><strong>c)</strong> P(una roja y una azul, en cualquier orden)</p>
+          <p><strong>d)</strong> P(al menos una roja)</p>
+          <p class="ejercicio pista" style="margin-top:8px;font-size:12px;color:var(--text3);font-style:italic">💭 Con 3 colores el árbol tiene 3 ramas en el primer nivel y 3 en cada segundo nivel → 9 caminos. Para (c) suma R,A y A,R. Para (d) usa el suceso contrario: "ninguna roja" = solo A o V.</p>
+        </div>
+        <button class="btn-bloque" style="margin-top:4px" onclick="quickAsk('Quiero hacer los ejercicios de práctica del árbol. Empiezo por el ejercicio 1: bolsa con 2 rojas y 3 azules CON reposición. Guíame paso a paso.')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Hacer los ejercicios con el tutor
+        </button>
+      </div>
+    </div>
+
+    <!-- PASO 6: Resumen y chuleta -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStep(this, 5)">
+        <div class="step-num">6</div>
+        <div class="step-info">
+          <div class="step-titulo">Resumen final — lo que hay que saber de memoria</div>
+          <div class="step-sub">La chuleta mental para el día del examen</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="resumen-final">
+          <h3>🧠 Chuleta mental — árbol sin reposición</h3>
+          <div class="formula-grid">
+            <div class="formula-item">
+              <span class="f-label">1ª EXTRACCIÓN</span>
+              <span class="f-val">denominador = N total</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">2ª EXTRACCIÓN</span>
+              <span class="f-val">denominador = N − 1</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">SI SALIÓ ESE COLOR</span>
+              <span class="f-val">numerador − 1</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">SI NO SALIÓ</span>
+              <span class="f-val">numerador igual</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">PROB. FINAL CAMINO</span>
+              <span class="f-val">rama1 × rama2</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">VARIOS CAMINOS</span>
+              <span class="f-val">suma sus probs.</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">"AL MENOS UNO"</span>
+              <span class="f-val">1 − P(ninguno)</span>
+            </div>
+            <div class="formula-item">
+              <span class="f-label">COMPROBACIÓN</span>
+              <span class="f-val">suma total = 1</span>
+            </div>
+          </div>
+        </div>
+        <button class="btn-bloque" style="margin-top:14px" onclick="quickAsk('Hazme un simulacro del problema 5 del examen pero con números distintos: árbol sin reposición, dos colores, cinco preguntas. Quiero practicarlo completo solo y luego me corriges.')">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+          Simulacro final del árbol con el tutor
+        </button>
+      </div>
+    </div>
+
+  </div><!-- fin tab-arbol -->
+
+
+  <!-- ==================== TAB: HISTOGRAMAS ==================== -->
+  <div id="tab-histo" class="tab-section">
+
+    <div class="session-header">
+      <div class="session-title">Sesión especial: <span style="color:var(--amber)">Histogramas</span></div>
+      <p class="session-meta">En el simulacro Daniel dibujó el histograma pero le faltaron las alturas correctas y el eje Y.<br>
+      Esta sesión explica desde cero qué es, cómo se dibuja y cómo se lee.</p>
+    </div>
+
+    <div class="progress-session" id="sessionProgressHisto">
+      <div class="prog-dot" id="hpd0"></div>
+      <div class="prog-dot" id="hpd1"></div>
+      <div class="prog-dot" id="hpd2"></div>
+      <div class="prog-dot" id="hpd3"></div>
+      <div class="prog-dot" id="hpd4"></div>
+    </div>
+
+    <!-- PASO 1: Qué es -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStepH(this, 0)">
+        <div class="step-num" style="background:rgba(251,191,36,0.15);color:var(--amber)">1</div>
+        <div class="step-info">
+          <div class="step-titulo">¿Qué es un histograma y para qué sirve?</div>
+          <div class="step-sub">La idea antes de ponerse a dibujar</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="concepto-box" style="background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.2)">
+          <span class="titulo-concepto" style="color:var(--amber)">Concepto</span>
+          Un histograma es un gráfico de <strong>barras pegadas</strong> que se usa para representar datos agrupados en intervalos.<br><br>
+          Cada barra representa un intervalo. Su <strong>altura</strong> indica cuántos datos hay en ese intervalo (la frecuencia absoluta).<br><br>
+          Se parece a un diagrama de barras normal, pero con una diferencia crucial: <strong>las barras se tocan</strong>, no hay espacio entre ellas. Eso indica que los datos son continuos o están agrupados.
+        </div>
+        <div class="concepto-box" style="background:rgba(91,156,246,0.06);border-color:rgba(91,156,246,0.2)">
+          <span class="titulo-concepto" style="color:var(--blue)">Histograma vs diagrama de barras — la diferencia visual</span>
+          <div style="display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:6px">
+            <div style="background:var(--bg3);border-radius:8px;padding:12px">
+              <div style="font-size:11px;font-family:var(--mono);color:var(--blue);margin-bottom:8px">DIAGRAMA DE BARRAS</div>
+              <div style="display:flex;align-items:flex-end;gap:6px;height:60px;padding:0 4px">
+                <div style="flex:1;background:rgba(91,156,246,0.5);border-radius:2px 2px 0 0;height:70%"></div>
+                <div style="flex:1;background:rgba(91,156,246,0.5);border-radius:2px 2px 0 0;height:45%"></div>
+                <div style="flex:1;background:rgba(91,156,246,0.5);border-radius:2px 2px 0 0;height:90%"></div>
+                <div style="flex:1;background:rgba(91,156,246,0.5);border-radius:2px 2px 0 0;height:30%"></div>
+              </div>
+              <div style="font-size:11px;color:var(--text3);margin-top:6px">Espacios entre barras<br>Datos discretos o cualitativos</div>
+            </div>
+            <div style="background:var(--bg3);border-radius:8px;padding:12px">
+              <div style="font-size:11px;font-family:var(--mono);color:var(--amber);margin-bottom:8px">HISTOGRAMA</div>
+              <div style="display:flex;align-items:flex-end;gap:0;height:60px;padding:0 4px">
+                <div style="flex:1;background:rgba(251,191,36,0.5);height:40%"></div>
+                <div style="flex:1;background:rgba(251,191,36,0.6);height:90%"></div>
+                <div style="flex:1;background:rgba(251,191,36,0.5);height:80%"></div>
+                <div style="flex:1;background:rgba(251,191,36,0.35);height:30%"></div>
+              </div>
+              <div style="font-size:11px;color:var(--text3);margin-top:6px">Barras pegadas (sin espacio)<br>Datos agrupados en intervalos</div>
+            </div>
+          </div>
+        </div>
+        <div class="regla-box" style="background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.2)">
+          <span class="regla-label" style="color:var(--amber)">📌 Regla fácil para recordarlo</span>
+          Si en el eje X hay <strong>categorías o nombres</strong> (rojo, azul, fútbol...) → diagrama de barras con espacios.<br>
+          Si en el eje X hay <strong>números con intervalos</strong> ([0,10), [10,20)...) → histograma, barras pegadas.
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 2: Los ejes -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStepH(this, 1)">
+        <div class="step-num" style="background:rgba(251,191,36,0.15);color:var(--amber)">2</div>
+        <div class="step-info">
+          <div class="step-titulo">Los dos ejes — qué va en cada uno</div>
+          <div class="step-sub">El error más común: dejar los ejes sin etiquetar o al revés</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin:12px 0">
+          <div class="concepto-box" style="background:rgba(45,212,160,0.06);border-color:rgba(45,212,160,0.2)">
+            <span class="titulo-concepto" style="color:var(--teal)">EJE X (horizontal)</span>
+            Muestra los <strong>límites de los intervalos</strong>.<br><br>
+            Ejemplo: 0, 10, 20, 30, 40<br><br>
+            Etiqueta: la variable medida.<br>
+            <span style="font-size:12px;color:var(--text3)">(ej: "Minutos de lectura")</span>
+          </div>
+          <div class="concepto-box" style="background:rgba(91,156,246,0.06);border-color:rgba(91,156,246,0.2)">
+            <span class="titulo-concepto" style="color:var(--blue)">EJE Y (vertical)</span>
+            Muestra la <strong>frecuencia absoluta</strong>.<br><br>
+            Ejemplo: 0, 2, 4, 6, 8, 10<br><br>
+            Etiqueta: "Frecuencia" o "Nº alumnos".<br>
+            <span style="font-size:12px;color:var(--text3)">(nunca se deja sin nombre)</span>
+          </div>
+        </div>
+        <div class="error-daniel">
+          <span class="err-label">❌ Error del simulacro de hoy</span>
+          Daniel dibujó las 4 barras con los intervalos correctos en el eje X, pero el eje Y no estaba etiquetado y las alturas de las barras eran incorrectas — la primera era demasiado alta respecto a las demás, no reflejaba que [0,10) tiene solo 4 alumnos frente a 9 de los intervalos siguientes.
+        </div>
+        <div class="correcto-box">
+          <span class="ok-label">✅ Cómo debe quedar</span>
+          Con los datos del simulacro: [0,10)→4, [10,20)→9, [20,30)→9, [30,40)→3<br><br>
+          El eje Y debe llegar al menos hasta 9. Las dos barras del medio deben ser claramente las más altas e iguales entre sí. La primera y la última, más bajas.
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 3: Cómo dibujarlo paso a paso -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStepH(this, 2)">
+        <div class="step-num" style="background:rgba(251,191,36,0.15);color:var(--amber)">3</div>
+        <div class="step-info">
+          <div class="step-titulo">Cómo dibujar un histograma paso a paso</div>
+          <div class="step-sub">El método que nunca falla</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="paso-a-paso">
+          <div class="paso">
+            <div class="paso-n">1</div>
+            <div class="paso-txt"><strong>Mira la tabla de frecuencias.</strong> Necesitas los intervalos y sus frecuencias absolutas. Ejemplo:<br>
+            [0,10)→4 · [10,20)→9 · [20,30)→9 · [30,40)→3</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">2</div>
+            <div class="paso-txt"><strong>Dibuja los ejes.</strong> El horizontal (X) para los intervalos, el vertical (Y) para la frecuencia. Deja espacio suficiente arriba para la barra más alta.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">3</div>
+            <div class="paso-txt"><strong>Escala el eje Y.</strong> Busca la frecuencia máxima (aquí 9) y marca números iguales hacia arriba: 0, 1, 2, 3... hasta 9 o 10. Cada división debe medir lo mismo.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">4</div>
+            <div class="paso-txt"><strong>Marca los límites de intervalos en el eje X.</strong> Aquí: 0, 10, 20, 30, 40. Espacios iguales entre ellos.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">5</div>
+            <div class="paso-txt"><strong>Dibuja cada barra.</strong> Arranca desde el límite izquierdo del intervalo, llega hasta el derecho, y sube exactamente hasta la frecuencia. Las barras se tocan: el lado derecho de una es el izquierdo de la siguiente.</div>
+          </div>
+          <div class="paso">
+            <div class="paso-n">6</div>
+            <div class="paso-txt"><strong>Etiqueta los ejes.</strong> Eje X: nombre de la variable. Eje Y: "Frecuencia" o "Nº de alumnos". Sin esta etiqueta, el gráfico no está completo.</div>
+          </div>
+        </div>
+
+        <!-- Histograma visual simulado con CSS -->
+        <div style="background:var(--bg3);border:1px solid var(--border);border-radius:var(--r-sm);padding:20px 16px 10px;margin:12px 0">
+          <div style="font-size:10px;font-family:var(--mono);color:var(--amber);text-transform:uppercase;letter-spacing:0.08em;margin-bottom:12px">Histograma correcto del simulacro</div>
+          <div style="display:flex;align-items:flex-end;gap:0;height:120px;border-left:2px solid var(--border2);border-bottom:2px solid var(--border2);padding:0 0 0 8px;position:relative">
+            <!-- Líneas guía Y -->
+            <div style="position:absolute;left:8px;right:0;bottom:40px;border-top:1px dashed rgba(255,255,255,0.06)"></div>
+            <div style="position:absolute;left:8px;right:0;bottom:80px;border-top:1px dashed rgba(255,255,255,0.06)"></div>
+            <div style="position:absolute;left:8px;right:0;bottom:120px;border-top:1px dashed rgba(255,255,255,0.06)"></div>
+            <!-- Etiquetas Y -->
+            <div style="position:absolute;left:-18px;bottom:36px;font-size:10px;color:var(--text3);font-family:var(--mono)">5</div>
+            <div style="position:absolute;left:-14px;bottom:76px;font-size:10px;color:var(--text3);font-family:var(--mono)">9</div>
+            <!-- Barras -->
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end">
+              <div style="background:rgba(251,191,36,0.55);border:1px solid rgba(251,191,36,0.4);border-bottom:none;height:53%;border-radius:2px 2px 0 0;margin-right:0"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end">
+              <div style="background:rgba(251,191,36,0.75);border:1px solid rgba(251,191,36,0.5);border-bottom:none;height:100%;border-radius:2px 2px 0 0;margin-right:0"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end">
+              <div style="background:rgba(251,191,36,0.75);border:1px solid rgba(251,191,36,0.5);border-bottom:none;height:100%;border-radius:2px 2px 0 0;margin-right:0"></div>
+            </div>
+            <div style="flex:1;display:flex;flex-direction:column;justify-content:flex-end">
+              <div style="background:rgba(251,191,36,0.4);border:1px solid rgba(251,191,36,0.3);border-bottom:none;height:33%;border-radius:2px 2px 0 0"></div>
+            </div>
+          </div>
+          <!-- Eje X labels -->
+          <div style="display:flex;padding-left:8px;margin-top:4px">
+            <div style="flex:1;text-align:left;font-size:10px;color:var(--text3);font-family:var(--mono)">0</div>
+            <div style="flex:1;text-align:left;font-size:10px;color:var(--text3);font-family:var(--mono)">10</div>
+            <div style="flex:1;text-align:left;font-size:10px;color:var(--text3);font-family:var(--mono)">20</div>
+            <div style="flex:1;text-align:left;font-size:10px;color:var(--text3);font-family:var(--mono)">30</div>
+            <div style="flex:0;text-align:right;font-size:10px;color:var(--text3);font-family:var(--mono)">40</div>
+          </div>
+          <div style="display:flex;justify-content:space-between;margin-top:2px;padding-left:8px">
+            <div style="font-size:11px;color:var(--text3)">← Minutos de lectura al día →</div>
+            <div style="font-size:10px;color:var(--text3);font-family:var(--mono)">n=[4, 9, 9, 3]</div>
+          </div>
+        </div>
+
+        <div class="regla-box" style="background:rgba(251,191,36,0.06);border-color:rgba(251,191,36,0.2)">
+          <span class="regla-label" style="color:var(--amber)">📌 Lo que no puede faltar</span>
+          ✔ Eje X con los límites de los intervalos numéricos<br>
+          ✔ Eje Y con la escala de frecuencias y su etiqueta<br>
+          ✔ Barras sin espacio entre ellas<br>
+          ✔ Altura de cada barra = frecuencia absoluta de ese intervalo<br>
+          ✔ Barras que arrancan exactamente en el límite del intervalo, no antes ni después
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 4: Cómo leer e interpretar -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStepH(this, 3)">
+        <div class="step-num" style="background:rgba(251,191,36,0.15);color:var(--amber)">4</div>
+        <div class="step-info">
+          <div class="step-titulo">Cómo leer e interpretar un histograma</div>
+          <div class="step-sub">Las preguntas que siempre caen en el examen</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="concepto-box" style="background:rgba(45,212,160,0.06);border-color:rgba(45,212,160,0.2)">
+          <span class="titulo-concepto" style="color:var(--teal)">Tipo de pregunta 1 — ¿Cuántos datos hay en un intervalo?</span>
+          Mira la altura de esa barra en el eje Y.<br>
+          Ejemplo: "¿Cuántos alumnos leen entre 10 y 20 minutos?" → altura de la barra [10,20) = <strong>9 alumnos</strong>.
+        </div>
+        <div class="concepto-box" style="background:rgba(45,212,160,0.06);border-color:rgba(45,212,160,0.2)">
+          <span class="titulo-concepto" style="color:var(--teal)">Tipo de pregunta 2 — ¿Cuántos datos hay por encima/debajo de X?</span>
+          Suma las alturas de los intervalos que cumplen la condición.<br>
+          Ejemplo: "¿Cuántos leen menos de 20 minutos?" → [0,10) + [10,20) = 4 + 9 = <strong>13 alumnos</strong>.
+        </div>
+        <div class="concepto-box" style="background:rgba(45,212,160,0.06);border-color:rgba(45,212,160,0.2)">
+          <span class="titulo-concepto" style="color:var(--teal)">Tipo de pregunta 3 — ¿Qué porcentaje representa un intervalo?</span>
+          frecuencia del intervalo ÷ total × 100.<br>
+          Ejemplo: "¿Qué % lee 30 min o más?" → 3 ÷ 25 × 100 = <strong>12%</strong>.<br>
+          <span style="font-size:12px;color:var(--red)">⚠️ Recuerda: ×100, no ÷100. Ese fue el error en el simulacro.</span>
+        </div>
+        <div class="concepto-box" style="background:rgba(45,212,160,0.06);border-color:rgba(45,212,160,0.2)">
+          <span class="titulo-concepto" style="color:var(--teal)">Tipo de pregunta 4 — ¿En qué intervalo hay más/menos datos?</span>
+          Busca la barra más alta (más datos) y la más baja (menos datos).<br>
+          También te pueden pedir si "la mayoría" cumple algo: suma los intervalos que cumplen y compara con el total. Si son más de la mitad, es verdad.
+        </div>
+        <div class="error-daniel">
+          <span class="err-label">❌ Trampa de "la mayoría" — el error del simulacro</span>
+          La pregunta era: "¿Es cierto que la mayoría lee más de 20 minutos?" <br>
+          Alumnos que leen más de 20 min: [20,30) + [30,40) = 9 + 3 = 12 de 25 → <strong>48%</strong>, no es mayoría.<br>
+          Alumnos que leen menos de 20 min: [0,10) + [10,20) = 4 + 9 = 13 de 25 → <strong>52%</strong>, esos sí son mayoría.<br>
+          Daniel lo respondió correctamente pero sin justificación numérica. En el examen real eso puede no puntuar.
+        </div>
+      </div>
+    </div>
+
+    <!-- PASO 5: Práctica -->
+    <div class="step-card">
+      <div class="step-card-header" onclick="toggleStepH(this, 4)">
+        <div class="step-num" style="background:rgba(251,191,36,0.15);color:var(--amber)">5</div>
+        <div class="step-info">
+          <div class="step-titulo">Ejercicios de práctica</div>
+          <div class="step-sub">Tres ejercicios progresivos para consolidar</div>
+        </div>
+        <svg class="chevron" viewBox="0 0 20 20" fill="currentColor" width="20" height="20"><path fill-rule="evenodd" d="M5.22 8.22a.75.75 0 0 1 1.06 0L10 11.94l3.72-3.72a.75.75 0 1 1 1.06 1.06l-4.25 4.25a.75.75 0 0 1-1.06 0L5.22 9.28a.75.75 0 0 1 0-1.06Z"/></svg>
+      </div>
+      <div class="step-body">
+        <div class="practica-card">
+          <span class="practica-label">🟢 Ejercicio 1 — Leer un histograma</span>
+          <p>Un histograma sobre tiempos de videojuego semanal de 20 alumnos tiene estas barras:</p>
+          <p><strong>[0,5h) → altura 2 &nbsp;·&nbsp; [5,10h) → altura 8 &nbsp;·&nbsp; [10,15h) → altura 6 &nbsp;·&nbsp; [15,20h) → altura 4</strong></p>
+          <p><strong>a)</strong> ¿Cuántos alumnos juegan entre 5 y 10 horas?</p>
+          <p><strong>b)</strong> ¿Qué porcentaje juega menos de 10 horas?</p>
+          <p><strong>c)</strong> ¿En qué intervalo hay más alumnos?</p>
+          <p><strong>d)</strong> ¿Es cierto que "la mayoría juega más de 10 horas"? Justifícalo.</p>
+          <p class="ejercicio pista" style="margin-top:8px;font-size:12px;color:var(--text3);font-style:italic">💭 Para el % recuerda: frecuencia ÷ total × 100.</p>
+        </div>
+        <div class="practica-card">
+          <span class="practica-label">🟡 Ejercicio 2 — Construir e interpretar</span>
+          <p>Las notas de 30 alumnos agrupadas son: <strong>[0,5)→3 &nbsp;·&nbsp; [5,6)→7 &nbsp;·&nbsp; [6,7)→10 &nbsp;·&nbsp; [7,8)→6 &nbsp;·&nbsp; [8,10)→4</strong></p>
+          <p><strong>a)</strong> Dibuja el histograma con los ejes correctamente etiquetados.</p>
+          <p><strong>b)</strong> ¿Cuántos alumnos aprobaron (nota ≥ 5)?</p>
+          <p><strong>c)</strong> ¿Qué porcentaje suspendió?</p>
+          <p><strong>d)</strong> El intervalo [8,10) tiene el doble de amplitud que los demás. ¿Afecta eso a cómo se dibuja su barra? Razona.</p>
+          <p class="ejercicio pista" style="margin-top:8px;font-size:12px;color:var(--text3);font-style:italic">💭 Para d): en un histograma correcto, lo que representa la frecuencia es el ÁREA de la barra, no solo la altura. Cuando la amplitud es doble, la altura debería ser la mitad para que el área sea proporcional. Esto es nivel avanzado — no se exige en 1º ESO pero sí en cursos superiores.</p>
+        </div>
+        <div class="practica-card">
+          <span class="practica-label">🔴 Ejercicio 3 — Construir desde datos brutos</span>
+          <p>Alturas en cm de 20 alumnos: <strong>152, 160, 165, 158, 172, 163, 155, 168, 170, 157, 162, 175, 166, 153, 169, 164, 171, 159, 167, 156</strong></p>
+          <p><strong>a)</strong> Calcula el rango.</p>
+          <p><strong>b)</strong> Agrupa en intervalos de amplitud 10 empezando en 150.</p>
+          <p><strong>c)</strong> Construye la tabla de frecuencias.</p>
+          <p><strong>d)</strong> Dibuja el histograma con los ejes etiquetados.</p>
+          <p><strong>e)</strong> ¿En qué intervalo se concentran más alumnos?</p>
+          <p class="ejercicio pista" style="margin-top:8px;font-size:12px;color:var(--text3);font-style:italic">💭 Este ejercicio une los bloques 3 y 4 del plan. Empieza por ordenar los datos y contar cuántos caen en cada intervalo.</p>
+        </div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap;margin-top:4px">
+          <button class="btn-bloque" style="flex:1;min-width:200px" onclick="quickAsk('Quiero practicar histogramas. Tengo un histograma con barras [0,5h)→2, [5,10h)→8, [10,15h)→6, [15,20h)→4 sobre 20 alumnos. Guíame para responder: ¿qué porcentaje juega menos de 10 horas? y ¿es cierto que la mayoría juega más de 10 horas?')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Practicar con el tutor
+          </button>
+          <button class="btn-bloque" style="flex:1;min-width:200px" onclick="quickAsk('Dame un histograma inventado con datos y hazme preguntas de interpretación para practicar. Corrígeme si me equivoco en los porcentajes — recuérdame que es ×100 no ÷100.')">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+            Ejercicio libre de interpretación
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Resumen final histograma -->
+    <div class="resumen-final" style="border-color:rgba(251,191,36,0.25)">
+      <h3 style="color:var(--amber)">🧠 Chuleta mental — histograma</h3>
+      <div class="formula-grid">
+        <div class="formula-item"><span class="f-label">EJE X</span><span class="f-val">límites de intervalos</span></div>
+        <div class="formula-item"><span class="f-label">EJE Y</span><span class="f-val">frecuencia absoluta</span></div>
+        <div class="formula-item"><span class="f-label">ALTURA BARRA</span><span class="f-val">= frecuencia del intervalo</span></div>
+        <div class="formula-item"><span class="f-label">BARRAS</span><span class="f-val">pegadas, sin espacio</span></div>
+        <div class="formula-item"><span class="f-label">PORCENTAJE</span><span class="f-val">frec ÷ total × 100</span></div>
+        <div class="formula-item"><span class="f-label">"LA MAYORÍA"</span><span class="f-val">&gt; 50% del total</span></div>
+        <div class="formula-item"><span class="f-label">VS BARRAS</span><span class="f-val">intervalos → histograma</span></div>
+        <div class="formula-item"><span class="f-label">VS BARRAS</span><span class="f-val">categorías → barras</span></div>
+      </div>
+    </div>
+
+  </div><!-- fin tab-histo -->
+
   <footer class="footer"><p>Plan de recuperación · Estadística y Probabilidad · 1º ESO · Incluye corrección del examen</p></footer>
 
 </div><!-- fin page -->
@@ -669,6 +1312,27 @@ function showTab(name) {
   document.querySelectorAll('.nav-tab').forEach(t => t.classList.remove('active'));
   document.getElementById('tab-' + name).classList.add('active');
   event.target.classList.add('active');
+}
+
+function toggleStep(header, idx) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
+  if (body.classList.contains('open')) {
+    document.getElementById('pd' + idx).classList.add('done');
+  }
+}
+
+function toggleStepH(header, idx) {
+  const body = header.nextElementSibling;
+  const chevron = header.querySelector('.chevron');
+  body.classList.toggle('open');
+  chevron.classList.toggle('open');
+  if (body.classList.contains('open')) {
+    const dot = document.getElementById('hpd' + idx);
+    if (dot) dot.classList.add('done');
+  }
 }
 
 function toggleBloque(header) {
